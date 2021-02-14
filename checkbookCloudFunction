@@ -1,0 +1,65 @@
+import requests
+
+def checkbook(request):
+    """Responds to any HTTP request.
+    Args:
+        request (flask.Request): HTTP request object.
+    Returns:
+        The response text or any set of values that can be turned into a
+        Response object using
+        `make_response <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>`.
+    """
+    if request.method == 'OPTIONS':
+        # Allows GET requests from any origin with the Content-Type
+        # header and caches preflight response for an 3600s
+        headers = {
+           'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
+            'Access-Control-Max-Age': '3600'
+        }
+
+        return ('', 204, headers)
+
+    # Set CORS headers for the main request
+    headers = {
+        'Access-Control-Allow-Origin': '*'
+    }
+
+    request_json = request.get_json()
+
+    def getArg(arg):
+        if request.args and arg in request.args:
+            return request.args.get(arg)
+        elif request_json and arg in request_json:
+            return request_json[arg]
+        else:
+            return f'Hello World!'
+
+    causeName, causeEmail, amt, pwd = getArg('causeName'), getArg('causeEmail'), getArg('amt'), getArg('pwd')
+    if not causeName or not causeEmail or not amt:
+        return "Missing Parameter"
+
+    if pwd == CENSORED:
+
+        url = "https://sandbox.checkbook.io/v3/check/digital"
+
+        
+        payload = {
+            "recipient": causeEmail,
+            "name": causeName,
+            "amount": float(amt),
+            "description": "Donation to " + causeName + " of $" + amt
+        }
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": "CENSORED"
+        }
+
+        response = requests.request("POST", url, json=payload, headers=headers)
+
+        return response.text
+
+    return 'incorrect password' + pwd
+
