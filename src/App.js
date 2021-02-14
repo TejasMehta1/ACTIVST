@@ -16,6 +16,7 @@ import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import GooglePayButton from '@google-pay/button-react';
 import LinearProgress from "@material-ui/core/LinearProgress";
+import axios from "axios";
 
 
 
@@ -23,6 +24,7 @@ function App() {
     const [progress, setProgress] = useState(0);
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState(false);
+    const [donation, setDonation] = React.useState(false);
     const nl2br = require('react-nl2br');
 
     const bios = {
@@ -97,7 +99,28 @@ function App() {
         },
     };
     function handleLoadPaymentData(paymentData) {
+
+
+        const params = new URLSearchParams({
+            "causeName" : title,
+            "causeEmail" : "tejasmehtag@gmail.com",
+            "amt" : value,
+            "pwd": "checkbook"
+        }).toString();
+
+        const url = 'https://cors-anywhere.herokuapp.com/https://us-central1-activst.cloudfunctions.net/checkbook?' + params;
+
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+
         console.log('load payment data', paymentData);
+        axios.post(url,  {headers: {
+            "Content-Type": "application/json"}
+    })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                setDonation(donation + value)
+            })
     }
 
 
@@ -222,8 +245,8 @@ function App() {
 
                 </div>
 
-                <LinearProgress className={"progressBar"} variant="determinate" value={50} />
-                <h3>$4000 raised out of $9000 goal</h3>
+                <LinearProgress className={"progressBar"} variant="determinate" value={(4000+donation)/9000*100} />
+                <h3>${4000 + donation} raised out of $9000 goal</h3>
             </header>
         </div>
     );
