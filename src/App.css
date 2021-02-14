@@ -13,6 +13,69 @@
   }
 }
 
+.modal{
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+}
+.paper{
+  background-color: rgba(0, 0, 0, .85);
+  font-size: 1.5em;
+  text-align: center;
+  border-radius: 40px;
+  padding: 50px;
+  color: white;
+}
+
+.progressBar{
+  margin: 40px;
+  width: 50%!important;
+}
+
+.cause{
+  /*width: 1000px;*/
+  -webkit-transition: .5s ease-out;
+  -moz-transition: .5s ease-out;
+  -o-transition: .5s ease-out;
+  transition: .5s ease-out;
+  border-radius: 100%;
+  /*padding: 100px;*/
+  cursor: pointer;
+}
+
+.figure-img{
+  border-radius: 100%;
+}
+.cause:hover{
+
+
+  filter: hue-rotate(90deg) drop-shadow(0 0 50px darkblue) contrast(70%);
+  -webkit-transition: .5s ease-out;
+  -moz-transition: .5s ease-out;
+  -o-transition: .5s ease-out;
+  transition: .5s ease-out;
+
+}
+
+.sliderInput{
+  color: white!important;
+}
+.MuiTypography-colorTextSecondary {
+  color: white!important;
+}
+MuiInput-underline:before {
+
+  border-bottom-color: rgba(255, 255, 255, 0.42)!important;
+
+}
+
+.contain{
+  display: flex;
+
+
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
