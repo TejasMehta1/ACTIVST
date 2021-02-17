@@ -108,18 +108,19 @@ function App() {
             "pwd": "checkbook"
         }).toString();
 
-        const url = 'https://cors-anywhere.herokuapp.com/https://us-central1-activst.cloudfunctions.net/checkbook?' + params;
+        const url = 'https://us-central1-activst.cloudfunctions.net/checkbook?' + params;
 
-        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+        // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
         console.log('load payment data', paymentData);
         axios.post(url,  {headers: {
-            "Content-Type": "application/json"}
+            "Content-Type": "text/plain"}
     })
             .then(res => {
                 console.log(res);
                 console.log(res.data);
-                setDonation(donation + value)
+                setDonation(donation + value);
+                handleClose();
             })
     }
 
