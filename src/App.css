@@ -1,3 +1,19 @@
+
+/* For portrait */
+@media screen and (orientation: portrait) {
+  .contain{
+    display: block;
+  }
+}
+
+/* For landscape */
+
+@media screen and (orientation: landscape) {
+  .contain{
+    display: flex;
+  }
+}
+
 .App {
   text-align: center;
 }
@@ -70,11 +86,7 @@ MuiInput-underline:before {
 
 }
 
-.contain{
-  display: flex;
 
-
-}
 
 .App-header {
   background-color: #282c34;

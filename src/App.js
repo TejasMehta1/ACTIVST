@@ -16,9 +16,9 @@ import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import GooglePayButton from '@google-pay/button-react';
 import LinearProgress from "@material-ui/core/LinearProgress";
+import Grid from '@material-ui/core/Grid';
 import axios from "axios";
-
-
+import Cause from './Cause';
 
 function App() {
     const [progress, setProgress] = useState(0);
@@ -45,6 +45,8 @@ function App() {
         setOpen(true);
         setTitle(title);
     };
+
+    const causeData = [{index: 1, title: "Black Lives Matter", picture: blm}, {index: 2, title: "No Kid Hungry", picture: nokid}, {index: 3, title: "Indian Farmers", picture: farmers}];
 
     const handleClose = () => {
         setOpen(false);
@@ -191,60 +193,16 @@ function App() {
                     />
                 </div>
                 <h1>Tejas Mehta's Causes</h1>
-                <div className={"contain"}>
-                    <Figure className={"cause"}>
-                        <Figure.Image
-                            width={300}
-                            height={300}
-                            alt="171x180"
-                            class="cause"
-                            src={blm}
-                            onClick={() => {
-                                setProgress(100);
-                                handleOpen("Black Lives Matter");
-                            }}
-                        />
-                        <Figure.Caption>
-                            Black Lives Matter
 
-                        </Figure.Caption>
-                    </Figure>
-                    <Figure className={"cause"}>
-                        <Figure.Image
-                            width={300}
-                            height={300}
-                            alt="171x180"
-                            class="cause"
-                            src={nokid}
-                            onClick={() => {
-                                setProgress(100);
-                                handleOpen("No Kid Hungry");
-                            }}
-                        />
-                        <Figure.Caption>
-                            No Kid Hungry
-
-                        </Figure.Caption>
-                    </Figure>
-
-                    <Figure className={"cause"}>
-                        <Figure.Image
-                            width={300}
-                            height={300}
-                            alt="171x180"
-                            class="cause"
-                            src={farmers}
-                            onClick={() => {
-                                setProgress(100);
-                                handleOpen("Indian Farmers");
-                            }}
-                        />
-                        <Figure.Caption>
-                            Indian Farmers
-                        </Figure.Caption>
-                    </Figure>
-
-                </div>
+                    <Grid item xs={12}>
+                        <Grid container justify="center" spacing={0}>
+                            {causeData.map((data) => (
+                                <Grid key={data.index} item>
+                                    <Cause title={data.title} picture={data.picture} handleOpen={handleOpen}/>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </Grid>
 
                 <LinearProgress className={"progressBar"} variant="determinate" value={(4000+donation)/9000*100} />
                 <h3>${4000 + donation} raised out of $9000 goal</h3>
