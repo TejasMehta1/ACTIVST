@@ -39,6 +39,7 @@ export const generateUserDocument = async (user, additionalData) => {
                 displayName,
                 email,
                 photoURL,
+                causes: [{title: "", image: "", description: ""}],
                 ...additionalData
             });
         } catch (error) {
@@ -154,7 +155,9 @@ export const getCauseArray = async (userHash) => {
 
 export const setCauseArray = async (userHash, newArray) => {
     if (!userHash) return;
-
+    if (newArray.length < 1 || !('title' in newArray[0] && 'image' in newArray[0] && 'description' in newArray[0])){
+        return;
+    }
     let docRef = firestore.collection("urls").doc(userHash);
     let doc = await docRef.get();
     let data = doc.data();

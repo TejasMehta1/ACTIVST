@@ -18,7 +18,7 @@ function Signup (){
                 setredirect('/')
         }
         else if('userName' in user && isValidUrl(user['userName'])){
-            setredirect('/admin/' + user['userName']);
+            setredirect('/admin');
         }
     }, [user]);
     if (redirect) {
@@ -38,7 +38,7 @@ function Signup (){
             }
             else if(res == user.uid){
                 console.log("Redirecting Anyways");
-                setredirect('/admin/' + userName);
+                setredirect('/admin');
             }
             else{
                 console.error("Url Already Exists" + res);

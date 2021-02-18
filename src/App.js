@@ -217,7 +217,7 @@ function App() {
                         loaderSpeed={600}
                     />
                 </div>
-                <h1>Tejas Mehta's Causes</h1>
+                <h1>@{userHash}'s Causes</h1>
 
                     <Grid item xs={12}>
                         <Grid container justify="center" spacing={0}>

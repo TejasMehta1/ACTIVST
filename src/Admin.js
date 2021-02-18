@@ -19,12 +19,15 @@ function Admin (){
     const user = useContext(UserContext);
     const [redirect, setredirect] = useState(null);
     const history = useHistory();
-    let [causeDBData, setCauseDBData] = useState([]);
-    let [newDBData, setNewDBData] = useState([]);
 
     const defaultCauseEdit = {title: "", image: "", description: ""};
 
-    let userHash = useParams().userHash;
+    let [causeDBData, setCauseDBData] = useState([]);
+    let [newDBData, setNewDBData] = useState([]);
+
+
+
+
     useEffect(() => {
         if (!user) {
             setredirect('/');
@@ -32,24 +35,15 @@ function Admin (){
         else if(!('userName' in user)){
             setredirect('/signup');
         }
-        else if('userName' in user && (user['userName'] !== userHash)){
-            setredirect('/admin/' + user['userName']);
-        }
         else{
-            getCauseArray(userHash).then(r => {
-                console.log(r);
-                setNewDBData(r);
-                setCauseDBData(r);
-            });
-
+            reinitialize();
         }
-    }, [user, userHash]);
+    }, [user]);
 
     useEffect(() => {
-        getUserName(user).then( r => {
-            setUserName(r);
-            console.log(r);
-        });
+        if(user){
+            reinitialize();
+        }
 
     }, []);
 
@@ -57,13 +51,34 @@ function Admin (){
         history.push(redirect);
     }
 
+    const reinitialize = () => {
+        getUserName(user).then( uName => {
+            setUserName(uName);
+            console.log(uName);
+            getCauseArray(uName).then(r => {
+                console.log(r);
+                if(r && r.length >= 1 && 'title' in r[0] && 'image' in r[0] && 'description' in r[0]) {
+                    setNewDBData(r);
+                    setCauseDBData(r);
+                }
+                else{
+                    setNewDBData(defaultCauseEdit);
+                    setCauseDBData(defaultCauseEdit);
+                }
+            });
+        });
+    };
+
     const handleUsernameChange = (newUsr) => {
         setUserName(newUsr.toLowerCase());
     };
 
     const getNewDBData = () => {
         let res = newDBData.filter((e, index)=>(e !== null));
-        console.log(res);
+        if(res.length < 1 || !('title' in res[0] && 'image' in res[0] && 'description' in res[0])){
+            return [defaultCauseEdit];
+        }
+        return res;
     };
 
     const updateDB = (index, key, value) => {
@@ -105,24 +120,36 @@ function Admin (){
         setCauseDBData(causeDBData.filter((e, index)=>(index !== 0)))
     };
 
+    const submitCausesAndUsername = async () => {
+        // let firstDone = false;
 
-    const submitUserName = async () => {
         if (userName !== "" && isValidUrl(userName)){
             let res = await checkIfUrlExists(userName);
             if (!res) {
-                updateUserName(user, userName).then(setredirect('/admin/' + userName));
+                updateUserName(user, userName).then( () =>
+                {
+                    setCauseArray(userName, getNewDBData()).then(() => {
+                        setredirect('/' + userName);
+                    });
+
+                }
+                );
             }
-            else if(res == user.uid){
-                console.log("Redirecting Anyways");
-                setredirect('/admin/' + userName);
+            else if(res === user.uid){
+                console.log("Didn't Change Username");
+                setCauseArray(userName, getNewDBData()).then(() => {
+                    setredirect('/' + userName);
+                });
             }
             else{
                 console.error("Url Already Exists" + res);
             }
         }
         else{
-            console.log(userName);
+            console.error("Invalid Username: " + userName);
         }
+
+
 
     };
 
@@ -133,7 +160,7 @@ function Admin (){
             code = str.charCodeAt(i);
             if (!(code > 47 && code < 58) && // numeric (0-9)
                 !(code > 64 && code < 91) &&
-                !(code == 45) &&
+                !(code === 45) &&
                 !(code > 96 && code < 123)) { // lower alpha (a-z)
                 return false;
             }
@@ -151,10 +178,10 @@ function Admin (){
                                onChange={event => handleUsernameChange(event.target.value)}
                     />
 
-                {causeDBData.map((data,index) => (
+                {causeDBData.length >= 1 ? causeDBData.map((data,index) => (
                         <CauseEdit ind={index} dbTitle={data.title} dbImage={data.image} dbDescription={data.description} handleDelete={handleDelete} updateDB={updateDB}/>
 
-                ))}
+                )) : reinitialize()}
                     {/*<CauseEdit index={1} dbTitle={"Tejas"}/>*/}
 
                 <Fab onClick={appendEmpty} color="primary" aria-label="add">
@@ -167,7 +194,7 @@ function Admin (){
                     color="primary"
                     size="large"
                     startIcon={<SaveIcon />}
-                    onClick={() => setCauseArray(userHash, newDBData)}
+                    onClick={() => submitCausesAndUsername()}
                 >
                     Save
                 </Button>

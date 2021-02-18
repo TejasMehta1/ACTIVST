@@ -3,7 +3,8 @@ import {
     Route,
     NavLink,
     HashRouter,
-    BrowserRouter
+    BrowserRouter,
+    Switch,
 } from "react-router-dom";
 import App from "./App";
 import Login from "./Login"
@@ -21,11 +22,12 @@ class Main extends Component {
                 {/*    <li><NavLink to="/app">Home</NavLink></li>*/}
                 {/*</ul>*/}
                 <div className="content">
-                    <Route exact path="/" component={Login}></Route>
-                    {/*<Route path="/app" component={App}/>*/}
-                    <Route path="/signup" component={Signup}/>
-                    <Route path="/admin/:userHash" component={Admin}/>
-                    <Route exact path="/:userHash" component={App}/>
+                    <Switch>
+                        <Route path="/signup" component={Signup}/>
+                        <Route path="/admin" component={Admin}/>
+                        <Route exact path="/" component={Login}></Route>
+                        <Route exact path="/:userHash" component={App}/>
+                    </Switch>
                 </div>
             </div>
             </BrowserRouter>
