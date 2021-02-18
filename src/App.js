@@ -29,9 +29,9 @@ import {
 function App() {
     const [progress, setProgress] = useState(0);
     const [open, setOpen] = React.useState(false);
-    const [title, setTitle] = React.useState(false);
+    const [currIndex, setCurrIndex] = React.useState(0);
     const [donation, setDonation] = React.useState(false);
-    const [causeData, setCauseData] = React.useState([{index: 0, title: "Activst", picture: ""}]);
+    const [causeData, setCauseData] = React.useState([{title: "Activst", image: ""}]);
     const nl2br = require('react-nl2br');
     let userHash = useParams().userHash;
 
@@ -49,9 +49,9 @@ function App() {
 
     };
 
-    const handleOpen = (title) => {
+    const handleOpen = (ind) => {
         setOpen(true);
-        setTitle(title);
+        setCurrIndex(ind);
     };
 
     const user = useContext(UserContext);
@@ -128,7 +128,7 @@ function App() {
 
 
         const params = new URLSearchParams({
-            "causeName" : title,
+            "causeName" : causeData[currIndex].title,
             "causeEmail" : "tejasmehtag@gmail.com",
             "amt" : value,
             "pwd": "checkbook"
@@ -169,8 +169,8 @@ function App() {
             >
                 <Fade in={open}>
                     <div className={"paper"}>
-                        <h2 id="transition-modal-title">{title}</h2>
-                        <p id="transition-modal-description">{nl2br(bios[title])}</p>
+                        <h2 id="transition-modal-title">{causeData[currIndex].title}</h2>
+                        <p id="transition-modal-description">{nl2br(causeData[currIndex].description)}</p>
                         <Slider
                             value={typeof value === 'number' ? value : 0}
                             onChange={handleSliderChange}
@@ -221,9 +221,9 @@ function App() {
 
                     <Grid item xs={12}>
                         <Grid container justify="center" spacing={0}>
-                            {causeData.map((data) => (
-                                <Grid key={data.index} item>
-                                    <Cause title={data.title} picture={data.picture} handleOpen={handleOpen}/>
+                            {causeData.map((data, index) => (
+                                <Grid key={index} item>
+                                    <Cause title={data.title} picture={data.image} handleOpen={handleOpen} index={index}/>
                                 </Grid>
                             ))}
                         </Grid>

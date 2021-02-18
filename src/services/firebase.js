@@ -62,6 +62,19 @@ const getUserDocument = async uid => {
     }
 };
 
+export const getUserName = async (user) => {
+    if(!user) return;
+
+    const userRef = firestore.collection('users').doc(user.uid);
+
+    const snapshot = await userRef.get();
+
+    if(snapshot.exists){
+        return await snapshot.get('userName');
+    }
+
+};
+
 export const updateUserName = async (user, usrName) => {
     if (!user) return;
 
@@ -138,6 +151,21 @@ export const getCauseArray = async (userHash) => {
         return array.data().causes;
     }
     };
+
+export const setCauseArray = async (userHash, newArray) => {
+    if (!userHash) return;
+
+    let docRef = firestore.collection("urls").doc(userHash);
+    let doc = await docRef.get();
+    let data = doc.data();
+    if(data && 'user' in data){
+        // let array = await data.user.get();
+        await data.user.update({
+            causes: newArray
+        });
+        return null;
+    }
+};
 
     // return 60;
 

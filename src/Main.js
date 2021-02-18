@@ -2,17 +2,19 @@ import React, { Component } from "react";
 import {
     Route,
     NavLink,
-    HashRouter
+    HashRouter,
+    BrowserRouter
 } from "react-router-dom";
 import App from "./App";
 import Login from "./Login"
 import UserProvider from "./providers/UserProvider";
 import Signup from "./Signup";
+import Admin from "./Admin";
 class Main extends Component {
     render() {
         return (
             <UserProvider>
-            <HashRouter>
+            <BrowserRouter>
             <div>
                 {/*<h1>Simple SPA</h1>*/}
                 {/*<ul className="header">*/}
@@ -20,13 +22,13 @@ class Main extends Component {
                 {/*</ul>*/}
                 <div className="content">
                     <Route exact path="/" component={Login}></Route>
-                    <Route path="/app" component={App}/>
+                    {/*<Route path="/app" component={App}/>*/}
                     <Route path="/signup" component={Signup}/>
-                    <Route path="/admin/:userHash" component={App}/>
-                    <Route path="/:userHash" component={App}/>
+                    <Route path="/admin/:userHash" component={Admin}/>
+                    <Route exact path="/:userHash" component={App}/>
                 </div>
             </div>
-            </HashRouter>
+            </BrowserRouter>
             </UserProvider>
         );
     }

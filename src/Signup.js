@@ -17,9 +17,9 @@ function Signup (){
         if (!user) {
                 setredirect('/')
         }
-        // else if('userName' in user && isValidUrl(user['userName'])){
-        //     setredirect('/admin/' + user['userName']);
-        // }
+        else if('userName' in user && isValidUrl(user['userName'])){
+            setredirect('/admin/' + user['userName']);
+        }
     }, [user]);
     if (redirect) {
         history.push(redirect);

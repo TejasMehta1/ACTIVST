@@ -2,7 +2,7 @@ import Figure from "react-bootstrap/Figure";
 import blm from "./blm.png";
 import Grid from "@material-ui/core/Grid";
 import React from "react";
-function Cause({handleOpen, title, picture}) {
+function Cause({handleOpen, title, picture, index}) {
 return(
     <Figure className={"cause"}>
         <Figure.Image
@@ -12,7 +12,7 @@ return(
             class="cause"
             src={picture}
             onClick={() => {
-                handleOpen(title);
+                handleOpen(index);
             }}
         />
         <Figure.Caption>
