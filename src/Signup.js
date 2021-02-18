@@ -1,6 +1,6 @@
 import { UserContext } from './providers/UserProvider';
 import React, {  useEffect, useContext, useState } from 'react';
-import { signInWithGoogle, updateUserName, checkIfUrlExists } from './services/firebase';
+import {signInWithGoogle, updateUserName, checkIfUrlExists, getUserName} from './services/firebase';
 import { Redirect, useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -17,8 +17,16 @@ function Signup (){
         if (!user) {
                 setredirect('/')
         }
-        else if('userName' in user && isValidUrl(user['userName'])){
+        else if(('userName' in user && isValidUrl(user['userName']))){
             setredirect('/admin');
+        }
+        else {
+            getUserName(user).then((res) =>
+            {
+                if (res && isValidUrl(res)){
+                    setredirect('/admin');
+                }
+            });
         }
     }, [user]);
     if (redirect) {
@@ -34,7 +42,11 @@ function Signup (){
         if (userName !== "" && isValidUrl(userName)){
             let res = await checkIfUrlExists(userName);
             if (!res) {
-                updateUserName(user, userName).then(setredirect('/admin/' + userName));
+                updateUserName(user, userName).then((r) => {
+                    if(r){
+                        setredirect('/');
+                    }
+                });
             }
             else if(res == user.uid){
                 console.log("Redirecting Anyways");

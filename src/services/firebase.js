@@ -94,11 +94,11 @@ export const updateUserName = async (user, usrName) => {
             });
         } catch (error) {
             console.error("Error creating user document", error);
+            return false;
         }
     }
 
-    let res = await addUrlDocument(user, usrName);
-    return res;
+    return await addUrlDocument(user, usrName);
 };
 
 const removeUrlDocument = async (usrName) => {

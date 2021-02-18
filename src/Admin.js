@@ -33,19 +33,30 @@ function Admin (){
             setredirect('/');
         }
         else if(!('userName' in user)){
-            setredirect('/signup');
+            getUserName(user).then((res) =>
+            {
+                if (!res){
+                    console.log("CYAAAAA");
+                    setredirect('/signup');
+                }
+                else{
+                    reinitialize();
+                }
+            });
+
         }
         else{
             reinitialize();
+
         }
     }, [user]);
 
-    useEffect(() => {
-        if(user){
-            reinitialize();
-        }
-
-    }, []);
+    // useEffect(() => {
+    //     if(user){
+    //         reinitialize();
+    //     }
+    //
+    // }, []);
 
     if (redirect) {
         history.push(redirect);
