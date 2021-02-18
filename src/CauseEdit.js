@@ -6,6 +6,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton";
+import NoImage from "./noImage.png";
 
 function CauseEdit({ind,dbTitle, dbImage, dbDescription, handleDelete, updateDB}) {
 
@@ -52,7 +53,7 @@ function CauseEdit({ind,dbTitle, dbImage, dbDescription, handleDelete, updateDB}
             />
             <br/>
             <br/>
-            <img className={"cropImage"} width={150} height={150} src={image}/>
+            <img className={"cropImage"} width={150} height={150} src={image} onError={(e)=>{e.target.onerror = null; e.target.src=NoImage}}/>
 
             <br/>
             <br/>
