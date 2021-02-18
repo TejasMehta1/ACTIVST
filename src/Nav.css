@@ -1,0 +1,13 @@
+.Nav{
+display: flex;
+}
+.Left{
+    /*float: left;*/
+    text-align: left;
+    width: 50%;
+}
+.Right{
+    /*float: right;*/
+    text-align: right;
+    width: 50%;
+}

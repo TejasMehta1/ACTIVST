@@ -26,6 +26,12 @@ export const signInWithGoogle = () => {
         console.log(error.message)
     })
 };
+
+export const signOut = () => {
+    return auth.signOut();
+};
+
+
 export const generateUserDocument = async (user, additionalData) => {
     if (!user) return;
 
@@ -48,6 +54,7 @@ export const generateUserDocument = async (user, additionalData) => {
     }
     return getUserDocument(user.uid);
 };
+
 
 const getUserDocument = async uid => {
     if (!uid) return null;

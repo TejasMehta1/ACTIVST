@@ -11,6 +11,7 @@ import Login from "./Login"
 import UserProvider from "./providers/UserProvider";
 import Signup from "./Signup";
 import Admin from "./Admin";
+import Nav from "./Nav"
 class Main extends Component {
     render() {
         return (
@@ -21,6 +22,7 @@ class Main extends Component {
                 {/*<ul className="header">*/}
                 {/*    <li><NavLink to="/app">Home</NavLink></li>*/}
                 {/*</ul>*/}
+                <Nav/>
                 <div className="content">
                     <Switch>
                         <Route path="/signup" component={Signup}/>
