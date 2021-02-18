@@ -23,6 +23,7 @@ class Main extends Component {
                     <Route path="/app" component={App}/>
                     <Route path="/signup" component={Signup}/>
                     <Route path="/admin/:userHash" component={App}/>
+                    <Route path="/:userHash" component={App}/>
                 </div>
             </div>
             </HashRouter>

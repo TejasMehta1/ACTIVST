@@ -6,7 +6,7 @@ import nokid from './nokidhungry.png'
 import Figure from 'react-bootstrap/Figure'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import LoadingBar from 'react-top-loading-bar'
-import React, {useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -19,13 +19,21 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import Grid from '@material-ui/core/Grid';
 import axios from "axios";
 import Cause from './Cause';
+import {getCauseArray} from './services/firebase';
+import {UserContext} from "./providers/UserProvider";
+import {
+    useParams
+} from "react-router-dom";
+
 
 function App() {
     const [progress, setProgress] = useState(0);
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState(false);
     const [donation, setDonation] = React.useState(false);
+    const [causeData, setCauseData] = React.useState([{index: 0, title: "Activst", picture: ""}]);
     const nl2br = require('react-nl2br');
+    let userHash = useParams().userHash;
 
     const bios = {
         "Black Lives Matter": "Black Lives Matter is a decentralized political and social movement protesting against incidents of police brutality and all racially motivated violence against black people. We appreciate your support of the movement and our ongoing fight to end state-sanctioned violence, liberate Black people, and end white supremacy forever.",
@@ -46,7 +54,23 @@ function App() {
         setTitle(title);
     };
 
-    const causeData = [{index: 1, title: "Black Lives Matter", picture: blm}, {index: 2, title: "No Kid Hungry", picture: nokid}, {index: 3, title: "Indian Farmers", picture: farmers}];
+    const user = useContext(UserContext);
+
+    // const causeData = [{index: 1, title: "Black Lives Matter", picture: "https://garveylhkgn.files.wordpress.com/2020/06/blm.png?w=450"}, {index: 2, title: "No Kid Hungry", picture: "https://pbs.twimg.com/profile_images/1179877675701342209/e9bo6xML_400x400.png"}, {index: 3, title: "Indian Farmers", picture: "https://ih1.redbubble.net/image.1745001457.7090/st,small,507x507-pad,600x600,f8f8f8.jpg"}];
+
+
+    useEffect(() => {
+        getCauseArray(userHash).then(r => {
+            if(r){
+                setCauseData(r);
+                console.log(r);
+                console.log(userHash);
+            }
+        });
+    }, []);
+
+
+
 
     const handleClose = () => {
         setOpen(false);
@@ -130,6 +154,7 @@ function App() {
     return (
 
         <div className="App">
+
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"

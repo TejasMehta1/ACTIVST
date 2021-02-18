@@ -99,7 +99,7 @@ const addUrlDocument = async (user, usrName) => {
     if (!snapshot.exists) {
         try {
             await urlRef.set({
-                uid: user.uid,
+                user: firestore.doc(`users/${user.uid}`),
             });
         } catch (error) {
             console.error("Error creating user document", error);
@@ -117,7 +117,7 @@ export const checkIfUrlExists = async (usrName) => {
     const urlRef = firestore.doc(`urls/${usrName}`);
     const snapshot = await urlRef.get();
     if (snapshot.exists){
-        return await snapshot.get('uid');
+        return await snapshot.get('user').id;
     }
     else{
         return false;
@@ -125,3 +125,24 @@ export const checkIfUrlExists = async (usrName) => {
 
 
 };
+
+
+export const getCauseArray = async (userHash) => {
+    if (!userHash) return;
+
+    let docRef = firestore.collection("urls").doc(userHash);
+    let doc = await docRef.get();
+    let data = doc.data();
+    if(data && 'user' in data){
+        let array = await data.user.get();
+        return array.data().causes;
+    }
+    };
+
+    // return 60;
+
+    // if (snapshot.exists){
+    //     const snapshot2 = snapshot.get('user');
+    //     let data = await snapshot2.get("causes");
+    //     return data;
+    // }
