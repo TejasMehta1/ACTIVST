@@ -47,18 +47,16 @@
 
 .navLogo {
     font-size: 3vh;
+    width: fit-content;
+    padding: .2em;
+    border-radius: 4px;
 }
 
 .navLogo img{
     height: 3vh!important;
 }
-.navLogo img:hover{
-    background-color: white;
-    cursor: pointer;
-
-}
-.navLogo span:hover{
-    background-color: white;
+.navLogo:hover{
+    background-color: rgba(255, 255, 255, 0.4);
     cursor: pointer;
 }
 

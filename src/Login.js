@@ -26,12 +26,14 @@ function Login (){
         return (
             <div className="App">
                 <header className="App-header">
-                    <h1>Sign up to be an <span className={"Logo"}>ACTIVST<img className={"logoHand"} src={Hand}/> </span></h1>
-                    <div className="login-buttons">
+                   
+                        <h1>Sign up to be an <span className={"Logo"}>ACTIVST<img className={"logoHand"} src={Hand}/> </span></h1>
+                        <div className="login-buttons">
 
-                            <GoogleButton id="googleSignIn" type="light" onClick={signInWithGoogle}/>
+                                <GoogleButton id="googleSignIn" type="light" onClick={signInWithGoogle}/>
 
-                    </div>
+                        </div>
+
                 </header>
             </div>
         );

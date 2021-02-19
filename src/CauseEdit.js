@@ -41,7 +41,7 @@ function CauseEdit({ind,dbTitle, dbImage, dbDescription, handleDelete, updateDB}
 
     return (
 
-        <div style={{display: isVisible ? 'block' : 'none'}} className={"container"}>
+        <div style={{display: isVisible ? 'block' : 'none'}} className={"variableContainer container"}>
 
             <TextField className="input" value={title} label="Cause Title" fullWidth
                        onChange={event => handleTitleChange(event.target.value)}

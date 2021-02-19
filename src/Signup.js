@@ -81,13 +81,15 @@ function Signup (){
         <div className="App">
             <header className="App-header">
                 <h1>Welcome {user && ['displayName'] in user ? user['displayName'] : ""}!</h1>
-                <div className="login-buttons">
+                <div className="variableContainer">
                     <p>Create your custom domain to host the causes you're most passionate about and allow for one-click donations (only use lowercase letters, numbers, and hyphens</p>
-                     <TextField id="username" label="Username"  InputProps={{
+                    <br/>
+                    <TextField id="username" label="Username"  InputProps={{
                     startAdornment: <InputAdornment position="start">Activst.com/</InputAdornment>,
                 }}
                      onChange={event => handleUsernameChange(event.target.value)}
                      />
+
                     <Button
                         variant="contained"
                         color="primary"

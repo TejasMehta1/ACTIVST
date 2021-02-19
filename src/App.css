@@ -118,6 +118,47 @@ MuiInput-underline:before {
   border-radius: 7.5px!important;
 }
 
+@media only screen and (max-width: 400px) {
+  .variableContainer{
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 600px) and (min-width: 401px) {
+  .variableContainer{
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 800px) and (min-width: 601px) {
+  .variableContainer{
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 801px){
+  .variableContainer{
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 1001px) {
+  .variableContainer{
+    width: 50%;
+  }
+}
+@media only screen and (min-width: 1201px) and (max-width: 1400px) {
+  .variableContainer{
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 1401px) {
+  .variableContainer{
+    width: 30%;
+  }
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
