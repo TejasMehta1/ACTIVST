@@ -2,6 +2,8 @@ import { UserContext } from './providers/UserProvider';
 import React, {  useEffect, useContext, useState } from 'react';
 import { signInWithGoogle } from './services/firebase';
 import { Redirect, useHistory } from "react-router-dom";
+import GoogleButton from "react-google-button";
+import Hand from "./helping.svg";
 function Login (){
 
     const user = useContext(UserContext);
@@ -24,12 +26,11 @@ function Login (){
         return (
             <div className="App">
                 <header className="App-header">
-                    <h1>Sign up to be an ACTIVST</h1>
+                    <h1>Sign up to be an <span className={"Logo"}>ACTIVST<img className={"logoHand"} src={Hand}/> </span></h1>
                     <div className="login-buttons">
-                        <button className="login-provider-button" onClick={signInWithGoogle}>
-                            <img src="https://img.icons8.com/ios-filled/50/000000/google-logo.png" alt="google icon"/>
-                            <span> Continue with Google</span>
-                        </button>
+
+                            <GoogleButton id="googleSignIn" type="light" onClick={signInWithGoogle}/>
+
                     </div>
                 </header>
             </div>

@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import "./Nav.css"
 import Grid from "@material-ui/core/Grid";
+import Tooltip from '@material-ui/core/Tooltip';
+import Hand from "./helping.svg"
 
 function Nav (){
 
@@ -26,12 +28,14 @@ function Nav (){
 
     return (
        <div className={"Nav"}>
-           <div className={"Left"}>
-               Activst
+           <div className={"Left vertical-center"}>
+               <h1 onClick={goTo} className={"Logo navLogo"}><span>ACTIVST</span> <img className={"logoHand"} src={Hand}/></h1>
 
            </div>
-           <div className={"Right"}>
-               {user ? <p>Welcome {user.displayName} <Button onClick={signOutAndGoTo}>Sign Out</Button></p> :  <Button onClick={goTo}>Sign Up</Button>}
+           <div className={"Right vertical-center"}>
+               {user ? <p className={"Welcome"}> <Tooltip title={user.email} arrow>
+                   <img className={"pfp vertical-center"} src={user.photoURL} alt="Profile"/>
+               </Tooltip> <Button id={"signOut"} onClick={signOutAndGoTo}>Sign Out</Button> </p>  :  (window.location.pathname !== "/" ? <Button onClick={goTo}>Sign Up</Button> : "")}
 
            </div>
 
