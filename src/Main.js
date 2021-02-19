@@ -12,6 +12,7 @@ import UserProvider from "./providers/UserProvider";
 import Signup from "./Signup";
 import Admin from "./Admin";
 import Nav from "./Nav"
+import NotFound from "./NotFound";
 class Main extends Component {
     render() {
         return (
@@ -27,6 +28,7 @@ class Main extends Component {
                     <Switch>
                         <Route path="/signup" component={Signup}/>
                         <Route path="/admin" component={Admin}/>
+                        <Route path="/notfound" component={NotFound}/>
                         <Route exact path="/" component={Login}></Route>
                         <Route exact path="/:userHash" component={App}/>
                     </Switch>

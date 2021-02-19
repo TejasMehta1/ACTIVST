@@ -21,6 +21,7 @@ import axios from "axios";
 import Cause from './Cause';
 import {getCauseArray} from './services/firebase';
 import {UserContext} from "./providers/UserProvider";
+import { Redirect, useHistory } from "react-router-dom";
 import {
     useParams
 } from "react-router-dom";
@@ -31,8 +32,11 @@ function App() {
     const [open, setOpen] = React.useState(false);
     const [currIndex, setCurrIndex] = React.useState(0);
     const [donation, setDonation] = React.useState(false);
+    const [showCauses, setShowCauses] = React.useState(false);
     const [causeData, setCauseData] = React.useState([{title: "Activst", image: ""}]);
     const nl2br = require('react-nl2br');
+    const history = useHistory();
+    const neededKeys = ['image', 'title', 'description'];
     let userHash = useParams().userHash;
 
     const bios = {
@@ -62,9 +66,34 @@ function App() {
     useEffect(() => {
         getCauseArray(userHash).then(r => {
             if(r){
-                setCauseData(r);
-                console.log(r);
-                console.log(userHash);
+                if(r.length >= 1) {
+                    let valid = true;
+                    for (let i = 0; i < r.length; i++){
+
+                        valid = neededKeys.every(key => Object.keys(r[i]).includes(key));
+                        if(valid){
+                            valid = r[i].title.length > 0
+                        }
+
+                    }
+                    if (valid){
+                        setShowCauses(true);
+                        setCauseData(r);
+                        console.log(r);
+                        console.log(userHash);
+                    }
+                    else{
+                        setShowCauses(false);
+                    }
+
+                }
+            }
+            else{
+                history.push({
+                        pathname: "/notfound",
+                        search: '?query=' + userHash
+                    }
+                )
             }
         });
     }, []);
@@ -221,11 +250,11 @@ function App() {
 
                     <Grid item xs={12}>
                         <Grid container justify="center" spacing={0}>
-                            {causeData.map((data, index) => (
+                            {showCauses ? causeData.map((data, index) => (
                                 <Grid key={index} item>
                                     <Cause title={data.title} picture={data.image} handleOpen={handleOpen} index={index}/>
                                 </Grid>
-                            ))}
+                            )) : userHash + " is currently advocating for no Causes"}
                         </Grid>
                     </Grid>
 
