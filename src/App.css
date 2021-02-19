@@ -120,13 +120,13 @@ MuiInput-underline:before {
 
 @media only screen and (max-width: 400px) {
   .variableContainer{
-    width: 90%;
+    width: 75%;
   }
 }
 
 @media only screen and (max-width: 600px) and (min-width: 401px) {
   .variableContainer{
-    width: 80%;
+    width: 75%;
   }
 }
 
