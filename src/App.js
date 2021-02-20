@@ -6,7 +6,7 @@ import nokid from './nokidhungry.png'
 import Figure from 'react-bootstrap/Figure'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import LoadingBar from 'react-top-loading-bar'
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState, useEffect, createRef} from 'react'
 import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -22,10 +22,19 @@ import Cause from './Cause';
 import {getCauseArray} from './services/firebase';
 import {UserContext} from "./providers/UserProvider";
 import { Redirect, useHistory } from "react-router-dom";
+import InstagramIcon from '@material-ui/icons/Instagram';
+import Button from "@material-ui/core/Button";
 import {
     useParams
 } from "react-router-dom";
-
+import {useScreenshot} from "./ReactScreenShotHook";
+import venmoIcon from './venmo-icon.svg'
+import gfm from './GoFundMe_logo.svg'
+import NoImage from "./noImage.png";
+import cashApp from './CashApp.svg'
+import petition from './petition.svg'
+import instagram from "./instagram.svg"
+import Checkbox from '@material-ui/core/Checkbox';
 
 function App() {
     const [progress, setProgress] = useState(0);
@@ -34,6 +43,9 @@ function App() {
     const [donation, setDonation] = React.useState(false);
     const [showCauses, setShowCauses] = React.useState(false);
     const [causeData, setCauseData] = React.useState([{title: "Activst", image: ""}]);
+
+
+
     const nl2br = require('react-nl2br');
     const history = useHistory();
     const neededKeys = ['image', 'title', 'description'];
@@ -178,6 +190,37 @@ function App() {
                 handleClose();
             })
     }
+    const ref = createRef(null);
+    const [image, takeScreenshot] = useScreenshot();
+    const getImage = () => {
+        // let prev = document.getElementById("instaButton").style.display;
+        // document.getElementById("instaButton").style.display = "none";
+        takeScreenshot(ref.current, {allowTaint: true, useCORS: true});
+        // document.getElementById("instaButton").style.display = prev;
+    };
+
+    useEffect(() => {
+        downloadImg();
+    }, [image]);
+
+    const downloadImg = () =>
+    {
+        if (image) {
+            // let svgElements = document.body.querySelectorAll('svg');
+            // svgElements.forEach(function(item) {
+            //     item.setAttribute("width", item.getBoundingClientRect().width);
+            //     item.setAttribute("height", item.getBoundingClientRect().height);
+            //     item.style.width = null;
+            //     item.style.height= null;
+            // });
+            const linkSource = image;
+            const downloadLink = document.createElement("a");
+            downloadLink.href = linkSource;
+            downloadLink.download = "test.png";
+            downloadLink.click();
+            window.location.href = 'instagram://story-camera';
+        }
+    };
 
 
     return (
@@ -185,9 +228,10 @@ function App() {
         <div className="App">
 
             <Modal
+                ref = {ref}
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                className={"modal"}
+                className={"modal variableContainer"}
                 open={open}
                 onClose={handleClose}
                 closeAfterTransition
@@ -199,12 +243,85 @@ function App() {
                 <Fade in={open}>
                     <div className={"paper"}>
                         <h2 id="transition-modal-title">{causeData[currIndex].title}</h2>
-                        <p id="transition-modal-description">{nl2br(causeData[currIndex].description)}</p>
+                        <img src={causeData[currIndex].image} width={150} onError={(e)=>{e.target.onerror = null; e.target.width=0; e.target.height=0;}} />
+                        <p id="transition-modal-description">
+                            {nl2br(causeData[currIndex].description)}
+                        </p>
+
+                        <h6>Spread Awareness by Sharing:
+
+                            <br/>
+                            <Button
+                                style={{marginTop:"10px"}}
+                                variant="contained"
+                                color="secondary"
+                                onClick={getImage}
+                                id={"instaButton"}
+                                startIcon={<img width={20} src={instagram}/>}
+                            >Story </Button>
+                        </h6>
+
+                        <h6>Let Your Voice Be Heard By Signing:
+
+                            <br/>
+                            <Button
+                                style={{marginTop:"10px"}}
+                                variant="contained"
+                                color="primary"
+                                id={"instaButton"}
+                                startIcon={<img width={10} src={petition}/>}
+                            >Petition </Button>
+                        </h6>
+
+                        <h6>Donate!
+
+                            Your funds will
+                        <br/>
+                        <Button
+                            style={{marginTop:"10px"}}
+                            variant="contained"
+                            color="primary"
+                            id={"venmoButton"}
+                            endIcon={<img width={75} src={venmoIcon}/>}
+                        >
+                            <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
+                            Donate with
+                        </Button>
+                            <br/>
+                        <Button
+                            style={{marginTop:"10px"}}
+                            variant="contained"
+                            color="primary"
+                            id={"gfmButton"}
+                            endIcon={<img width={75} src={gfm}/>}
+                        >
+                            <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
+                            Donate with
+                        </Button>
+                            <br/>
+                        <Button
+                            style={{marginTop:"10px"}}
+                            variant="contained"
+                            color="none"
+                            id={"cashAppButton"}
+                            endIcon={<img width={75} src={cashApp}/>}
+                        >
+                            <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
+                            Donate with
+                        </Button>
+
+                        </h6>
+
+
+
                         <Slider
                             value={typeof value === 'number' ? value : 0}
                             onChange={handleSliderChange}
                             aria-labelledby="input-slider"
                         />
+
+
+
 
 
                         <Input
@@ -223,8 +340,6 @@ function App() {
 
                             }}
                         />
-                        <br/>
-                        <br/>
                         <br/>
                         <GooglePayButton
                             environment="TEST"

@@ -28,12 +28,32 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+#gfmButton{
+  background-color: #02a95c;
+  filter: brightness(110%);
+}
+#venmoButton{
+  background-color: #3D95CE;
+  filter: brightness(110%);
+}
+
+#cashAppButton:hover, #venmoButton:hover, #gfmButton:hover{
+    filter: brightness(90%);
+  }
+#cashAppButton{
+  background-color: white;
+}
+
+
 
 .modal{
-  width: 50%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 10%;
+/*.modal-body {*/
+  max-height: calc(100vh - 10px);
+  overflow-y: auto;
+/*}*/
 }
 .paper{
   background-color: rgba(0, 0, 0, .85);

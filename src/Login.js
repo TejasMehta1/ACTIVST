@@ -26,10 +26,10 @@ function Login (){
         return (
             <div className="App">
                 <header className="App-header">
-                   
+
                         <h1>Sign up to be an <span className={"Logo"}>ACTIVST<img className={"logoHand"} src={Hand}/> </span></h1>
                         <div className="login-buttons">
-
+                                {/*<a href={"instagram://story-camera"}>Story</a>*/}
                                 <GoogleButton id="googleSignIn" type="light" onClick={signInWithGoogle}/>
 
                         </div>

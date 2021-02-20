@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="195"
+   width="800"
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 800 195"
+   version="1.1"
+   sodipodi:docname="CashApp.svg"
+   inkscape:version="1.0rc1 (09960d6, 2020-04-09)">
+  <metadata
+     id="metadata906">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Cash App - Dollar - Full</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:document-rotation="0"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1792"
+     inkscape:window-height="991"
+     id="namedview904"
+     showgrid="false"
+     inkscape:zoom="1.3577017"
+     inkscape:cx="416.99253"
+     inkscape:cy="199.3481"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="Layer_1" />
+  <defs
+     id="defs896">
+    <style
+       id="style869">.cls-1{fill:#1c1d1f;}.cls-2{fill-rule:evenodd;fill:url(#New_Gradient_Swatch_2);}.cls-3{fill:#fff;}</style>
+    <linearGradient
+       id="New_Gradient_Swatch_2"
+       x1="43.200001"
+       y1="86.400002"
+       x2="43.200001"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#00c244"
+         id="stop871" />
+      <stop
+         offset="1"
+         stop-color="#00d64b"
+         id="stop873" />
+    </linearGradient>
+    <symbol
+       id="RGB_Cash_App"
+       data-name="RGB Cash App"
+       viewBox="0 0 267.44 55.4">
+      <path
+         inkscape:connector-curvature="0"
+         class="cls-1"
+         d="M 34,13 A 1.59,1.59 0 0 1 31.88,12.59 12.36,12.36 0 0 0 21.4,7.32 c -8,0 -12.92,6.33 -12.92,15.37 0,9.04 5,15.49 13,15.49 A 12.24,12.24 0 0 0 32,32.65 1.6,1.6 0 0 1 34.11,32.18 l 3.79,2.2 a 1.61,1.61 0 0 1 0.5,2.33 19.77,19.77 0 0 1 -17,8.79 C 8.67,45.5 0,36.22 0,22.69 0,9.16 8.67,0 21.27,0 a 20.15,20.15 0 0 1 16.92,8.38 1.62,1.62 0 0 1 -0.44,2.33 z"
+         id="path876" />
+      <path
+         inkscape:connector-curvature="0"
+         class="cls-1"
+         d="m 62,43.1 v -1.84 c -2,2.58 -4.8,4.18 -9.29,4.18 -6.64,0 -11.25,-3.63 -11.25,-10 0,-7.93 7.07,-9.29 11.44,-9.9 4.67,-0.68 8.67,-1 8.67,-4.06 0,-2.71 -3.14,-3.44 -5.79,-3.44 a 19.63,19.63 0 0 0 -8.72,2.21 1.59,1.59 0 0 1 -2.19,-0.69 l -1.4,-2.84 a 1.6,1.6 0 0 1 0.66,-2.12 26.07,26.07 0 0 1 12.26,-3.1 c 7.62,0 13,3.13 13,10.7 v 20.9 a 1.6,1.6 0 0 1 -1.6,1.6 h -4.2 A 1.6,1.6 0 0 1 62,43.1 Z M 61.57,28.65 c -1.48,1.11 -4.19,1.48 -7.08,2 -2.89,0.52 -5.28,1.29 -5.28,4.43 0,2.89 2.09,4.24 5.1,4.24 3.75,0 7.26,-2.09 7.26,-6.95 z"
+         id="path878" />
+      <path
+         inkscape:connector-curvature="0"
+         class="cls-1"
+         d="m 76.3,36.42 a 1.6,1.6 0 0 1 2.22,-0.21 14.83,14.83 0 0 0 9.29,3 c 3.45,0 6,-1.11 6,-3.81 0,-2.46 -2.34,-3 -8,-3.94 -6,-1 -11.75,-3 -11.75,-9.84 0,-7.13 6.15,-10.14 13.16,-10.14 a 19.67,19.67 0 0 1 12.19,4 1.59,1.59 0 0 1 0.22,2.31 l -2,2.35 A 1.61,1.61 0 0 1 95.43,20.39 14.09,14.09 0 0 0 87,17.65 c -3,0 -5.53,0.86 -5.53,3.19 0,2.59 3.63,3.08 7.26,3.69 7.74,1.36 12.66,3.57 12.66,10 0,6.77 -5.41,10.95 -14,10.95 a 20.14,20.14 0 0 1 -13,-4.25 1.61,1.61 0 0 1 -0.21,-2.29 z"
+         id="path880" />
+      <path
+         inkscape:connector-curvature="0"
+         class="cls-1"
+         d="M 106.08,43.1 V 2.4 a 1.6,1.6 0 0 1 1.6,-1.6 h 4.61 a 1.6,1.6 0 0 1 1.6,1.6 v 13.89 a 11.94,11.94 0 0 1 9.9,-4.79 c 6.83,0 10.82,4.86 10.82,11.8 v 19.8 a 1.6,1.6 0 0 1 -1.6,1.6 h -4.61 a 1.6,1.6 0 0 1 -1.6,-1.6 v -18 c 0,-3.45 -1.1,-6.58 -5.53,-6.58 -4.18,0 -7.38,2.95 -7.38,7.87 V 43.1 a 1.6,1.6 0 0 1 -1.6,1.6 h -4.61 a 1.6,1.6 0 0 1 -1.6,-1.6 z"
+         id="path882" />
+      <path
+         inkscape:connector-curvature="0"
+         class="cls-1"
+         d="M 185.34,43.61 182,33.82 h -16.76 l -3.32,9.79 A 1.6,1.6 0 0 1 160.4,44.7 H 155 a 1.6,1.6 0 0 1 -1.5,-2.16 l 15.1,-40.7 a 1.6,1.6 0 0 1 1.5,-1 h 7.43 a 1.6,1.6 0 0 1 1.5,1 l 15.05,40.71 a 1.6,1.6 0 0 1 -1.5,2.15 h -5.72 a 1.6,1.6 0 0 1 -1.52,-1.09 z M 173.72,7.93 167.27,27 h 12.66 z"
+         id="path884" />
+      <path
+         inkscape:connector-curvature="0"
+         class="cls-1"
+         d="m 205.64,13.84 v 2.52 a 11.72,11.72 0 0 1 10,-4.86 c 8.86,0 14.58,7.32 14.58,16.91 0,9.59 -5.72,17 -14.58,17 a 11.73,11.73 0 0 1 -10,-4.92 V 53.8 a 1.6,1.6 0 0 1 -1.6,1.6 h -4.61 a 1.6,1.6 0 0 1 -1.6,-1.6 v -40 a 1.6,1.6 0 0 1 1.6,-1.6 H 204 a 1.6,1.6 0 0 1 1.64,1.64 z M 214,38.61 c 5.41,0 8.06,-4.61 8.06,-10.2 0,-5.59 -2.65,-10.09 -8.06,-10.09 -5.41,0 -8.36,4.49 -8.36,10.09 0,5.6 2.89,10.2 8.36,10.2 z"
+         id="path886" />
+      <path
+         inkscape:connector-curvature="0"
+         class="cls-1"
+         d="m 242.84,13.84 v 2.52 a 11.75,11.75 0 0 1 10,-4.86 c 8.85,0 14.57,7.32 14.57,16.91 0,9.59 -5.72,17 -14.57,17 a 11.76,11.76 0 0 1 -10,-4.92 V 53.8 a 1.6,1.6 0 0 1 -1.6,1.6 h -4.6 a 1.6,1.6 0 0 1 -1.6,-1.6 v -40 a 1.59,1.59 0 0 1 1.6,-1.6 h 4.6 a 1.59,1.59 0 0 1 1.6,1.64 z m 8.37,24.77 c 5.41,0 8,-4.61 8,-10.2 0,-5.59 -2.64,-10.09 -8,-10.09 -5.36,0 -8.37,4.49 -8.37,10.09 0,5.6 2.9,10.2 8.37,10.2 z"
+         id="path888" />
+    </symbol>
+    <symbol
+       id="RGB_Dollar"
+       data-name="RGB Dollar"
+       viewBox="0 0 86.4 86.4">
+      <path
+         inkscape:connector-curvature="0"
+         class="cls-2"
+         d="M 56.28,0 C 65,0 69.29,0 74,1.48 a 18.34,18.34 0 0 1 11,11 c 1.48,4.67 1.48,9 1.48,17.68 v 26.12 c 0,8.67 0,13 -1.48,17.68 a 18.34,18.34 0 0 1 -11,11 c -4.67,1.48 -9,1.48 -17.68,1.48 h -26.2 c -8.67,0 -13,0 -17.68,-1.48 a 18.34,18.34 0 0 1 -11,-11 C 0,69.29 0,65 0,56.28 V 30.12 c 0,-8.67 0,-13 1.48,-17.68 a 18.34,18.34 0 0 1 11,-11 C 17.11,0 21.45,0 30.12,0 Z"
+         id="path891" />
+      <path
+         inkscape:connector-curvature="0"
+         class="cls-3"
+         d="m 45.4,28.33 a 18,18 0 0 1 11.6,4.26 1.77,1.77 0 0 0 2.43,-0.05 l 3.34,-3.35 a 1.71,1.71 0 0 0 -0.09,-2.51 26.48,26.48 0 0 0 -8.93,-5 l 1,-4.93 A 1.74,1.74 0 0 0 53.04,14.66 H 46.61 A 1.75,1.75 0 0 0 44.9,16.03 L 44,20.44 c -8.56,0.42 -15.82,4.66 -15.82,13.35 0,7.51 6,10.74 12.34,13 6,2.23 9.18,3.06 9.18,6.2 0,3.14 -3.17,5.12 -7.84,5.12 a 17.26,17.26 0 0 1 -12.19,-4.77 1.74,1.74 0 0 0 -2.44,0 l -3.58,3.5 a 1.73,1.73 0 0 0 0,2.49 A 23.71,23.71 0 0 0 34,65 l -1,4.57 a 1.78,1.78 0 0 0 1.7,2.14 h 6.45 a 1.75,1.75 0 0 0 1.72,-1.38 L 43.8,66 C 54.06,65.37 60.33,59.85 60.33,51.77 60.33,44.33 54.08,41.19 46.49,38.63 42.15,37 38.4,35.93 38.4,32.71 c 0,-3.22 3.5,-4.38 7,-4.38 z"
+         id="path893" />
+
+    </symbol>
+  </defs>
+  <title
+     id="title898">Cash App - Dollar - Full</title>
+  <use
+     width="267.44"
+     height="55.400002"
+     transform="matrix(2.020163,0,0,1.9969347,256.03395,51.777001)"
+     xlink:href="#RGB_Cash_App"
+     id="use900"
+     x="0"
+     y="0" />
+  <use
+     id="RGB_Dollar-3"
+     data-name="RGB Dollar"
+     width="86.400002"
+     height="86.400002"
+     transform="matrix(2.020163,0,0,1.9969347,8.6447865,10.959655)"
+     xlink:href="#RGB_Dollar"
+     x="0"
+     y="0" />
+</svg>

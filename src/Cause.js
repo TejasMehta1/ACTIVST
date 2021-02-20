@@ -4,6 +4,8 @@ import Grid from "@material-ui/core/Grid";
 import React from "react";
 import NoImage from "./noImage.png";
 function Cause({handleOpen, title, picture, index}) {
+
+
 return(
     <Figure className={"cause"}>
         <Figure.Image

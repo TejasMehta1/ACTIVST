@@ -22,28 +22,39 @@ p{
 }
 
 
-.MuiInput-underline:before{
-    border-bottom: 1px solid rgb(255, 255, 255) !important;
+/*.MuiInput-underline:before{*/
+/*    border-bottom: 1px solid rgb(255, 255, 255) !important;*/
+/*}*/
+
+/*.MuiFormControl-root:hover .MuiInput-underline:before{*/
+/*    border-bottom: 2px solid rgb(255, 255, 255) !important;*/
+
+/*}*/
+
+/*.MuiInputLabel-root{*/
+/*    color: white!important;*/
+
+/*}*/
+
+/*.MuiInputBase-root{*/
+/*    color: white!important;*/
+
+/*}*/
+
+/*.MuiOutlinedInput-notchedOutline {*/
+
+/*    border-color: rgb(255, 255, 255) !important;*/
+/*}*/
+
+.paymentInfo{
+    vertical-align: middle;
+    /*horiz-align: right;*/
+    /*float: right;*/
+
+    width: 20vh;
 }
 
-.MuiFormControl-root:hover .MuiInput-underline:before{
-    border-bottom: 2px solid rgb(255, 255, 255) !important;
-
+.donationInfo{
+    text-align: left;
+    display: block;
 }
-
-.MuiInputLabel-root{
-    color: white!important;
-
-}
-
-.MuiInputBase-root{
-    color: white!important;
-
-}
-
-.MuiOutlinedInput-notchedOutline {
-
-    border-color: rgb(255, 255, 255) !important;
-}
-
-

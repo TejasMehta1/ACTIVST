@@ -20,7 +20,14 @@ function Admin (){
     const [redirect, setredirect] = useState(null);
     const history = useHistory();
 
-    const defaultCauseEdit = {title: "", image: "", description: ""};
+    const defaultCauseEdit = {title: "", image: "", description: "",
+            venmo: "",
+            gofundme: "",
+            cashapp: "",
+            direct: "",
+            petition: "",
+            website: "",
+    };
 
     let [causeDBData, setCauseDBData] = useState([]);
     let [newDBData, setNewDBData] = useState([]);
@@ -95,7 +102,7 @@ function Admin (){
     const updateDB = (index, key, value) => {
         let newArr = [];
         for (let i = 0; i < newDBData.length; i++){
-            if(i != index) {
+            if(i !== index) {
                 newArr.push(newDBData[i]);
             }
             else{
@@ -190,7 +197,7 @@ function Admin (){
                     />
 
                 {causeDBData.length >= 1 ? causeDBData.map((data,index) => (
-                        <CauseEdit ind={index} dbTitle={data.title} dbImage={data.image} dbDescription={data.description} handleDelete={handleDelete} updateDB={updateDB}/>
+                        <CauseEdit ind={index} db = {data} handleDelete={handleDelete} updateDB={updateDB}/>
 
                 )) : reinitialize()}
                     {/*<CauseEdit index={1} dbTitle={"Tejas"}/>*/}
