@@ -51,7 +51,8 @@ p{
     /*horiz-align: right;*/
     /*float: right;*/
 
-    width: 20vh;
+    width: 45%;
+    margin-bottom: 20px;
 }
 
 .donationInfo{

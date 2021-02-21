@@ -49,6 +49,7 @@ function App() {
     const nl2br = require('react-nl2br');
     const history = useHistory();
     const neededKeys = ['image', 'title', 'description'];
+    const donationTypes = ['venmo', "gofundme", "cashapp", "direct"];
     let userHash = useParams().userHash;
 
     const bios = {
@@ -134,6 +135,29 @@ function App() {
             setValue(100);
         }
     };
+
+    const donationIsPresent = (param) => {
+        return param in causeData[currIndex] && causeData[currIndex][param].length > 0;
+    };
+
+    const anyDonationIsPresent = () => {
+        for (let i = 0; i < donationTypes.length; i++){
+            if (!donationIsPresent(donationTypes[i])){
+                return false;
+            }
+        }
+        return true;
+    };
+
+    const getDonation = (param) => {
+        if (donationIsPresent(param)){
+            return causeData[currIndex][param];
+        }
+        else{
+            return "";
+        }
+    };
+
     const paymentRequest = {
         apiVersion: 2,
         apiVersionMinor: 0,
@@ -261,6 +285,7 @@ function App() {
                             >Story </Button>
                         </h6>
 
+                        {donationIsPresent('petition') ?
                         <h6>Let Your Voice Be Heard By Signing:
 
                             <br/>
@@ -272,12 +297,11 @@ function App() {
                                 startIcon={<img width={10} src={petition}/>}
                             >Petition </Button>
                         </h6>
+                            : null }
 
-                        <h6>Donate!
-
-                            Your funds will
+                         <h6>{ anyDonationIsPresent() ? "Donate!" : ""}
                         <br/>
-                        <Button
+                            { donationIsPresent("venmo") ? <Button
                             style={{marginTop:"10px"}}
                             variant="contained"
                             color="primary"
@@ -286,9 +310,9 @@ function App() {
                         >
                             <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
                             Donate with
-                        </Button>
+                        </Button> : null}
                             <br/>
-                        <Button
+                            { donationIsPresent("gofundme") ? <Button
                             style={{marginTop:"10px"}}
                             variant="contained"
                             color="primary"
@@ -297,9 +321,9 @@ function App() {
                         >
                             <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
                             Donate with
-                        </Button>
+                        </Button> : null}
                             <br/>
-                        <Button
+                            { donationIsPresent("cashapp") ?<Button
                             style={{marginTop:"10px"}}
                             variant="contained"
                             color="none"
@@ -308,12 +332,24 @@ function App() {
                         >
                             <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
                             Donate with
-                        </Button>
+                        </Button> : null }
+                        <br/>
+                             { donationIsPresent("direct") ?<Button
+                                 style={{marginTop:"10px"}}
+                                 variant="contained"
+                                 color="none"
+                                 id={"directButton"}
+                                 color={"primary"}
+                                 // endIcon={<img width={75} src={cashApp}/>}
+                             >
+                                 <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
+                                 Donate on website
+                             </Button> : null }
 
                         </h6>
 
-
-
+                        { false ?
+                        <div>
                         <Slider
                             value={typeof value === 'number' ? value : 0}
                             onChange={handleSliderChange}
@@ -348,6 +384,7 @@ function App() {
                             paymentRequest={paymentRequest}
                             onLoadPaymentData={handleLoadPaymentData}
                         />
+                        </div> : null }
 
                     </div>
                 </Fade>

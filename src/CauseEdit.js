@@ -122,6 +122,7 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
                         />
                     }
                     label="Cause Website"
+                    className={"paymentInfo"}
                 />
                 <TextField id="websiteUsername" label="Website" className={"paymentInfo"} value={donationData.website}
                            InputProps={{
@@ -143,6 +144,7 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
                             color="primary"
                         />
                     }
+                    className={"paymentInfo"}
                     label="Petition"
                 />
                 <TextField id="petitionUsername" label="Website" className={"paymentInfo"} value={donationData.petition}
@@ -167,6 +169,7 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
                         />
                     }
                     label="Venmo"
+                    className={"paymentInfo"}
                 />
                 <TextField id="venmoUsername" label="Username" className={"paymentInfo"} value={donationData.venmo}
                            InputProps={{
@@ -189,6 +192,7 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
                         />
                     }
                     label="Cash App"
+                    className={"paymentInfo"}
                 />
 
                 <TextField id="cashappUsername" label="Username" className={"paymentInfo"} value={donationData.cashapp}
@@ -211,6 +215,7 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
                             color="primary"
                         />
                     }
+                    className={"paymentInfo"}
                     label="Gofundme"
                 />
                 <TextField id="gofundmeUsername" label="Website" className={"paymentInfo"} value={donationData.gofundme}
@@ -234,6 +239,7 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
                         />
                     }
                     label="Other Website"
+                    className={"paymentInfo"}
                 />
                 <TextField id="directUsername" label="Website" className={"paymentInfo"} value={donationData.direct}
                            InputProps={{
