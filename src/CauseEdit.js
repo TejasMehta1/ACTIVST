@@ -197,7 +197,7 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
 
                 <TextField id="cashappUsername" label="Username" className={"paymentInfo"} value={donationData.cashapp}
                            InputProps={{
-                               startAdornment: <InputAdornment position="start">@</InputAdornment>,
+                               startAdornment: <InputAdornment position="start">$</InputAdornment>,
                            }}
                            disabled={!donations.cashapp}
                            // variant={"outlined"}

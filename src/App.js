@@ -240,7 +240,9 @@ function App() {
             const linkSource = image;
             const downloadLink = document.createElement("a");
             downloadLink.href = linkSource;
-            downloadLink.download = "test.png";
+            let today = new Date();
+            let niceDate = today.getFullYear() + "-"  + today.getMonth() + "-" + today.getDate() + '-' + today.getHours() + "+" + today.getMinutes();
+            downloadLink.download = getDonation('title') + "-" + niceDate + ".png";
             downloadLink.click();
             window.location.href = 'instagram://story-camera';
         }
@@ -295,6 +297,7 @@ function App() {
                                 color="primary"
                                 id={"instaButton"}
                                 startIcon={<img width={10} src={petition}/>}
+                                onClick={() => window.open(getDonation("petition"), "_blank")}
                             >Petition </Button>
                         </h6>
                             : null }
@@ -306,6 +309,7 @@ function App() {
                             variant="contained"
                             color="primary"
                             id={"venmoButton"}
+                            onClick={() => window.open("https://venmo.com/" + getDonation("venmo"), "_blank")}
                             endIcon={<img width={75} src={venmoIcon}/>}
                         >
                             <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
@@ -317,6 +321,7 @@ function App() {
                             variant="contained"
                             color="primary"
                             id={"gfmButton"}
+                            onClick={() => window.open(getDonation("gofundme"), "_blank")}
                             endIcon={<img width={75} src={gfm}/>}
                         >
                             <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
@@ -328,6 +333,7 @@ function App() {
                             variant="contained"
                             color="none"
                             id={"cashAppButton"}
+                            onClick={() => window.open("https://cash.app/$" + getDonation("cashapp"), "_blank")}
                             endIcon={<img width={75} src={cashApp}/>}
                         >
                             <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
@@ -340,6 +346,7 @@ function App() {
                                  color="none"
                                  id={"directButton"}
                                  color={"primary"}
+                                 onClick={() => window.open(getDonation("direct"), "_blank")}
                                  // endIcon={<img width={75} src={cashApp}/>}
                              >
                                  <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
@@ -348,7 +355,7 @@ function App() {
 
                         </h6>
 
-                        { false ?
+                        { true ?
                         <div>
                         <Slider
                             value={typeof value === 'number' ? value : 0}

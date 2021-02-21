@@ -4,7 +4,6 @@
     <list default="true" id="b6a35f89-423a-4e6c-983e-362e6bf9541f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CauseEdit.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/CauseEdit.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CauseEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/CauseEdit.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +78,7 @@
       <workItem from="1613585876001" duration="46000" />
       <workItem from="1613585936146" duration="47723000" />
       <workItem from="1613766510929" duration="2039000" />
-      <workItem from="1613783109177" duration="19720000" />
+      <workItem from="1613783109177" duration="21472000" />
     </task>
     <task id="LOCAL-00001" summary="FirstCommit">
       <created>1613299048357</created>
@@ -186,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613862379625</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Added new Donation Types on Main UI">
+      <created>1613872289613</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1613872289613</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,7 +213,8 @@
     <MESSAGE value="New Navbar Design" />
     <MESSAGE value="Improved Mobile Usability" />
     <MESSAGE value="Added additional Payment options" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added additional Payment options" />
+    <MESSAGE value="Added new Donation Types on Main UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added new Donation Types on Main UI" />
   </component>
   <component name="WindowStateProjectService">
     <state x="903" y="446" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1613689917705">
@@ -216,49 +223,49 @@
     <state x="632" y="347" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1613617213940" />
     <state x="903" y="446" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1440@0.0.2560.1440" timestamp="1613689917705" />
     <state x="632" y="340" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1792.1017@0.25.1792.1017" timestamp="1613531891200" />
-    <state x="734" y="166" key="CommitChangelistDialog2" timestamp="1613862379239">
+    <state x="734" y="166" key="CommitChangelistDialog2" timestamp="1613872289266">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="227" y="282" key="CommitChangelistDialog2/-1792.605.1792.1095/0.25.2560.1311@0.25.2560.1311" timestamp="1613299048155" />
-    <state x="734" y="166" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1613862379239" />
+    <state x="734" y="166" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1613872289266" />
     <state x="1049" y="213" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1613733129005" />
-    <state width="1771" height="272" key="GridCell.Tab.0.bottom" timestamp="1613868911623">
+    <state width="1771" height="272" key="GridCell.Tab.0.bottom" timestamp="1613872297961">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="2539" height="273" key="GridCell.Tab.0.bottom/-1792.580.1792.1120/0.0.2560.1440@0.0.2560.1440" timestamp="1613546259396" />
     <state width="2539" height="371" key="GridCell.Tab.0.bottom/-1792.605.1792.1095/0.25.2560.1311@0.25.2560.1311" timestamp="1613292190345" />
-    <state width="1771" height="272" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1613868911623" />
+    <state width="1771" height="272" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1613872297961" />
     <state width="2539" height="364" key="GridCell.Tab.0.bottom/0.0.2560.1440@0.0.2560.1440" timestamp="1613773194400" />
     <state width="1771" height="273" key="GridCell.Tab.0.bottom/0.25.1792.1017@0.25.1792.1017" timestamp="1613532809809" />
-    <state width="1771" height="272" key="GridCell.Tab.0.center" timestamp="1613868911622">
+    <state width="1771" height="272" key="GridCell.Tab.0.center" timestamp="1613872297959">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="2539" height="273" key="GridCell.Tab.0.center/-1792.580.1792.1120/0.0.2560.1440@0.0.2560.1440" timestamp="1613546259394" />
     <state width="2539" height="371" key="GridCell.Tab.0.center/-1792.605.1792.1095/0.25.2560.1311@0.25.2560.1311" timestamp="1613292190345" />
-    <state width="1771" height="272" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1613868911622" />
+    <state width="1771" height="272" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1613872297959" />
     <state width="2539" height="364" key="GridCell.Tab.0.center/0.0.2560.1440@0.0.2560.1440" timestamp="1613773194399" />
     <state width="1771" height="273" key="GridCell.Tab.0.center/0.25.1792.1017@0.25.1792.1017" timestamp="1613532809809" />
-    <state width="1771" height="272" key="GridCell.Tab.0.left" timestamp="1613868911622">
+    <state width="1771" height="272" key="GridCell.Tab.0.left" timestamp="1613872297958">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="2539" height="273" key="GridCell.Tab.0.left/-1792.580.1792.1120/0.0.2560.1440@0.0.2560.1440" timestamp="1613546259392" />
     <state width="2539" height="371" key="GridCell.Tab.0.left/-1792.605.1792.1095/0.25.2560.1311@0.25.2560.1311" timestamp="1613292190344" />
-    <state width="1771" height="272" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1613868911622" />
+    <state width="1771" height="272" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1613872297958" />
     <state width="2539" height="364" key="GridCell.Tab.0.left/0.0.2560.1440@0.0.2560.1440" timestamp="1613773194399" />
     <state width="1771" height="273" key="GridCell.Tab.0.left/0.25.1792.1017@0.25.1792.1017" timestamp="1613532809808" />
-    <state width="1771" height="272" key="GridCell.Tab.0.right" timestamp="1613868911623">
+    <state width="1771" height="272" key="GridCell.Tab.0.right" timestamp="1613872297959">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="2539" height="273" key="GridCell.Tab.0.right/-1792.580.1792.1120/0.0.2560.1440@0.0.2560.1440" timestamp="1613546259395" />
     <state width="2539" height="371" key="GridCell.Tab.0.right/-1792.605.1792.1095/0.25.2560.1311@0.25.2560.1311" timestamp="1613292190345" />
-    <state width="1771" height="272" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1613868911623" />
+    <state width="1771" height="272" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1613872297959" />
     <state width="2539" height="364" key="GridCell.Tab.0.right/0.0.2560.1440@0.0.2560.1440" timestamp="1613773194400" />
     <state width="1771" height="273" key="GridCell.Tab.0.right/0.25.1792.1017@0.25.1792.1017" timestamp="1613532809809" />
-    <state x="168" y="324" key="Vcs.Push.Dialog.v2" timestamp="1613862381987">
+    <state x="168" y="324" key="Vcs.Push.Dialog.v2" timestamp="1613872291124">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="240" y="405" key="Vcs.Push.Dialog.v2/-1792.605.1792.1095/0.25.2560.1311@0.25.2560.1311" timestamp="1613299098528" />
-    <state x="168" y="324" key="Vcs.Push.Dialog.v2/0.0.1792.1120@0.0.1792.1120" timestamp="1613862381987" />
+    <state x="168" y="324" key="Vcs.Push.Dialog.v2/0.0.1792.1120@0.0.1792.1120" timestamp="1613872291124" />
     <state x="240" y="417" key="Vcs.Push.Dialog.v2/0.0.2560.1440@0.0.2560.1440" timestamp="1613733130720" />
     <state x="794" y="417" width="972" height="607" key="find.popup" timestamp="1613721599407">
       <screen x="0" y="0" width="2560" height="1440" />
