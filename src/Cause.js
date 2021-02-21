@@ -9,9 +9,9 @@ function Cause({handleOpen, title, picture, index}) {
 return(
     <Figure className={"cause"}>
         <Figure.Image
-            width="300"
-            height="300"
-            alt="171x180"
+            width="275"
+            height="275"
+            alt={title + " image"}
             class="cause"
             src={picture}
             onError={(e)=>{e.target.onerror = null; e.target.src=NoImage}}

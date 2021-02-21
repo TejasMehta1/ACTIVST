@@ -37,9 +37,23 @@
   filter: brightness(110%);
 }
 
-#cashAppButton:hover, #venmoButton:hover, #gfmButton:hover{
+#petitionButton{
+   background-color: #6600ce;
+   filter: brightness(110%);
+ }
+
+#directButton{
+  background-color: #994636;
+  filter: brightness(110%);
+}
+
+#cashAppButton:hover, #venmoButton:hover, #gfmButton:hover, #petitionButton:hover, #directButton:hover{
     filter: brightness(90%);
   }
+
+#cashAppButton, #venmoButton, #gfmButton, #directButton{
+  width: 15em;
+}
 #cashAppButton{
   background-color: white;
 }
@@ -49,19 +63,37 @@
 .modal{
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10%;
+  margin-top: 5vh;
 /*.modal-body {*/
   max-height: calc(100vh - 10px);
   overflow-y: auto;
+  border-radius: 20px;
+  outline: 0!important;
 /*}*/
+}
+
+#closeModal{
+  cursor: pointer;
+  color: red;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 1.3em;
+}
+
+.donationButton{
+  margin-top: 10px!important;
+
 }
 .paper{
   background-color: rgba(0, 0, 0, .85);
   font-size: 1.5em;
   text-align: center;
-  border-radius: 40px;
+  border-radius: 20px;
   padding: 50px;
   color: white;
+  outline: 0;
+
 }
 
 .progressBar{

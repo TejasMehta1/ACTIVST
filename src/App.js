@@ -24,6 +24,8 @@ import {UserContext} from "./providers/UserProvider";
 import { Redirect, useHistory } from "react-router-dom";
 import InstagramIcon from '@material-ui/icons/Instagram';
 import Button from "@material-ui/core/Button";
+import ClearIcon from '@material-ui/icons/Clear';
+import WebIcon from '@material-ui/icons/Web';
 import {
     useParams
 } from "react-router-dom";
@@ -142,11 +144,11 @@ function App() {
 
     const anyDonationIsPresent = () => {
         for (let i = 0; i < donationTypes.length; i++){
-            if (!donationIsPresent(donationTypes[i])){
-                return false;
+            if (donationIsPresent(donationTypes[i])){
+                return true;
             }
         }
-        return true;
+        return false;
     };
 
     const getDonation = (param) => {
@@ -268,17 +270,27 @@ function App() {
             >
                 <Fade in={open}>
                     <div className={"paper"}>
+                        <ClearIcon id={"closeModal"} onClick={handleClose} />
                         <h2 id="transition-modal-title">{causeData[currIndex].title}</h2>
                         <img src={causeData[currIndex].image} width={150} onError={(e)=>{e.target.onerror = null; e.target.width=0; e.target.height=0;}} />
                         <p id="transition-modal-description">
                             {nl2br(causeData[currIndex].description)}
                         </p>
 
+                        <Button
+                            className={"donationButton"}
+                            // variant="contained"
+                            color="primary"
+                            onClick={() => window.open(getDonation("website"), "_blank")}
+                            id={"websiteButton"}
+                            startIcon={<WebIcon/>}
+                        >Learn More</Button>
+
                         <h6>Spread Awareness by Sharing:
 
                             <br/>
                             <Button
-                                style={{marginTop:"10px"}}
+                                className={"donationButton"}
                                 variant="contained"
                                 color="secondary"
                                 onClick={getImage}
@@ -289,13 +301,13 @@ function App() {
 
                         {donationIsPresent('petition') ?
                         <h6>Let Your Voice Be Heard By Signing:
+                        <br/>
 
-                            <br/>
                             <Button
-                                style={{marginTop:"10px"}}
+                                className={"donationButton"}
                                 variant="contained"
-                                color="primary"
-                                id={"instaButton"}
+                                color="secondary"
+                                id={"petitionButton"}
                                 startIcon={<img width={10} src={petition}/>}
                                 onClick={() => window.open(getDonation("petition"), "_blank")}
                             >Petition </Button>
@@ -303,33 +315,37 @@ function App() {
                             : null }
 
                          <h6>{ anyDonationIsPresent() ? "Donate!" : ""}
-                        <br/>
-                            { donationIsPresent("venmo") ? <Button
-                            style={{marginTop:"10px"}}
+
+                            { donationIsPresent("venmo") ? <React.Fragment>
+                                <br/>
+                                <Button
+                                    className={"donationButton"}
                             variant="contained"
-                            color="primary"
+                            color="secondary"
                             id={"venmoButton"}
                             onClick={() => window.open("https://venmo.com/" + getDonation("venmo"), "_blank")}
                             endIcon={<img width={75} src={venmoIcon}/>}
                         >
                             <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
                             Donate with
-                        </Button> : null}
-                            <br/>
-                            { donationIsPresent("gofundme") ? <Button
-                            style={{marginTop:"10px"}}
+                        </Button> </React.Fragment>: null}
+
+                            { donationIsPresent("gofundme") ? <React.Fragment>
+                                    <br/> <Button
+                            className={"donationButton"}
                             variant="contained"
-                            color="primary"
+                            color="secondary"
                             id={"gfmButton"}
                             onClick={() => window.open(getDonation("gofundme"), "_blank")}
                             endIcon={<img width={75} src={gfm}/>}
                         >
                             <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
                             Donate with
-                        </Button> : null}
-                            <br/>
-                            { donationIsPresent("cashapp") ?<Button
-                            style={{marginTop:"10px"}}
+                            </Button> </React.Fragment>: null}
+
+                            { donationIsPresent("cashapp") ? <React.Fragment>
+                                    <br/><Button
+                                className={"donationButton"}
                             variant="contained"
                             color="none"
                             id={"cashAppButton"}
@@ -338,24 +354,24 @@ function App() {
                         >
                             <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
                             Donate with
-                        </Button> : null }
-                        <br/>
-                             { donationIsPresent("direct") ?<Button
-                                 style={{marginTop:"10px"}}
+                            </Button> </React.Fragment>: null }
+                             { donationIsPresent("direct") ? <React.Fragment>
+                                     <br/><Button
+                                 className={"donationButton"}
                                  variant="contained"
                                  color="none"
                                  id={"directButton"}
-                                 color={"primary"}
+                                 color={"secondary"}
                                  onClick={() => window.open(getDonation("direct"), "_blank")}
-                                 // endIcon={<img width={75} src={cashApp}/>}
+                                 endIcon={<WebIcon/>}
                              >
                                  <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
                                  Donate on website
-                             </Button> : null }
+                             </Button> </React.Fragment>: null }
 
                         </h6>
 
-                        { true ?
+                        { false ?
                         <div>
                         <Slider
                             value={typeof value === 'number' ? value : 0}

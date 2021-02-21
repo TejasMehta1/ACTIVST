@@ -20,7 +20,7 @@ class Main extends Component {
     render() {
         const themeObject = {
             palette: {
-                primary: { main: "#3f51b5"},
+                primary: { main: "#01D3FE"},
                 secondary: {main: "#f50057"},
                 type: "dark",
                 tertiary: "#0A2640",

@@ -23,6 +23,10 @@ function Nav (){
         signOut().then(() => goTo());
     };
 
+    const showAdmin = () => {
+        // return ;
+    };
+
 
 
 
@@ -35,7 +39,7 @@ function Nav (){
            <div className={"Right vertical-center"}>
                {user ? <p className={"Welcome"}> <Tooltip title={user.email} arrow>
                    <img className={"pfp vertical-center"} src={user.photoURL} alt="Profile"/>
-               </Tooltip> <Button id={"signOut"} onClick={signOutAndGoTo}>Sign Out</Button> </p>  :  (window.location.pathname !== "/" ? <Button onClick={goTo}>Sign Up</Button> : "")}
+               </Tooltip>  <Button id={"adminButton"} variant={"contained"} onClick={goTo}>Admin</Button> <Button id={"signOut"} onClick={signOutAndGoTo}>Sign Out</Button> </p>  :  (window.location.pathname !== "/" ? <Button onClick={goTo}>Sign Up</Button> : "")}
 
            </div>
 
