@@ -79,7 +79,7 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
 
         <div style={{display: isVisible ? 'block' : 'none'}} className={"variableContainer container"}>
 
-            <TextField className="input" value={title} label="Cause Title" fullWidth
+            <TextField className="input" error={!title} value={title} label="Cause Title (*)" fullWidth
                        onChange={event => handleTitleChange(event.target.value)}
             />
             <br/>
@@ -96,7 +96,7 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
 
             <br/>
             <br/>
-            <TextField className={"input"} value={description} label="What is the cause, why is it important, how can we help?"
+            <TextField className={"input"} error={!description} value={description} label="What is the cause, why is it important, how can we help? (*)"
                        onChange={event => handleDescriptionChange(event.target.value)}
                        multiline
                        fullWidth

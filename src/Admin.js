@@ -10,6 +10,8 @@ import SaveIcon from '@material-ui/icons/Save'
 import CauseEdit from "./CauseEdit";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import toaster from "toasted-notes";
+import "toasted-notes/src/styles.css"; // optional styles
 
 import './Signup.css';
 import Grid from "@material-ui/core/Grid";
@@ -31,6 +33,7 @@ function Admin (){
 
     let [causeDBData, setCauseDBData] = useState([]);
     let [newDBData, setNewDBData] = useState([]);
+    const neededKeys = ['title', 'description'];
 
 
 
@@ -138,33 +141,61 @@ function Admin (){
         setCauseDBData(causeDBData.filter((e, index)=>(index !== 0)))
     };
 
+    const dbIsValid = () => {
+        let res = newDBData.filter((e, index)=>(e !== null));
+        if(res.length < 1 || !('title' in res[0] && 'image' in res[0] && 'description' in res[0])){
+            return true;
+        }
+
+        for (let i = 0; i < res.length; i++){
+            if (!neededKeys.every(key => Object.keys(res[i]).includes(key))){
+                return false;
+            }
+            for (let ke in neededKeys){
+                if (res[i][neededKeys[ke]] === ""){
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+
     const submitCausesAndUsername = async () => {
         // let firstDone = false;
+        if(dbIsValid()) {
+            if (userName !== "" && isValidUrl(userName)) {
+                let res = await checkIfUrlExists(userName);
+                if (!res) {
+                    updateUserName(user, userName).then(() => {
+                            setCauseArray(userName, getNewDBData()).then(() => {
+                                setredirect('/' + userName);
+                            });
 
-        if (userName !== "" && isValidUrl(userName)){
-            let res = await checkIfUrlExists(userName);
-            if (!res) {
-                updateUserName(user, userName).then( () =>
-                {
+                        }
+                    );
+                } else if (res === user.uid) {
+                    console.log("Didn't Change Username");
                     setCauseArray(userName, getNewDBData()).then(() => {
                         setredirect('/' + userName);
                     });
-
+                } else {
+                    toaster.notify("Username Already Taken", {
+                        duration: 3000
+                    });
+                    console.error("Url Already Exists" + res);
                 }
-                );
-            }
-            else if(res === user.uid){
-                console.log("Didn't Change Username");
-                setCauseArray(userName, getNewDBData()).then(() => {
-                    setredirect('/' + userName);
+            } else {
+                toaster.notify("Username contains invalid characters: " + userName, {
+                    duration: 3000,
                 });
-            }
-            else{
-                console.error("Url Already Exists" + res);
+                console.error("Invalid Username: " + userName);
             }
         }
         else{
-            console.error("Invalid Username: " + userName);
+            toaster.notify("Make sure every cause has a title and description!", {
+                duration: 3000,
+            });
+            console.error("Invalid CauseDB: " + getNewDBData());
         }
 
 
@@ -190,7 +221,7 @@ function Admin (){
         <div className="App">
             <header className="App-header">
                 <h1>Welcome {user && ['displayName'] in user ? user['displayName'] : ""}!</h1>
-                       <TextField id="username" label="Username"  value={userName} InputProps={{
+                       <TextField id="username" label="Username" error={!isValidUrl(userName)}  value={userName} InputProps={{
                         startAdornment: <InputAdornment position="start">Activst.com/</InputAdornment>,
                     }}
                                onChange={event => handleUsernameChange(event.target.value)}

@@ -50,7 +50,7 @@ function App() {
 
     const nl2br = require('react-nl2br');
     const history = useHistory();
-    const neededKeys = ['image', 'title', 'description'];
+    const neededKeys = ['title', 'description'];
     const donationTypes = ['venmo', "gofundme", "cashapp", "direct"];
     let userHash = useParams().userHash;
 
@@ -276,7 +276,7 @@ function App() {
                         <p id="transition-modal-description">
                             {nl2br(causeData[currIndex].description)}
                         </p>
-
+                        {donationIsPresent('website') ?
                         <Button
                             className={"donationButton"}
                             // variant="contained"
@@ -284,7 +284,7 @@ function App() {
                             onClick={() => window.open(getDonation("website"), "_blank")}
                             id={"websiteButton"}
                             startIcon={<WebIcon/>}
-                        >Learn More</Button>
+                        >Learn More</Button> : "" }
 
                         <h6>Spread Awareness by Sharing:
 

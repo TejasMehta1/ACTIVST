@@ -6,6 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import toaster from "toasted-notes";
+import "toasted-notes/src/styles.css"; // optional styles
 
 import './Signup.css';
 function Signup (){
@@ -54,9 +56,15 @@ function Signup (){
             }
             else{
                 console.error("Url Already Exists" + res);
+                toaster.notify("Username Already Taken", {
+                    duration: 3000
+                });
             }
         }
         else{
+            toaster.notify("Username contains invalid characters: " + userName, {
+                duration: 3000,
+            });
             console.log(userName);
         }
 
@@ -84,7 +92,7 @@ function Signup (){
                 <div className="variableContainer">
                     <p>Create your custom domain to host the causes you're most passionate about and allow for one-click donations (only use lowercase letters, numbers, and hyphens</p>
                     <br/>
-                    <TextField id="username" label="Username"  InputProps={{
+                    <TextField error={!isValidUrl(userName)} value={userName} id="username" label="Username(*)"  InputProps={{
                     startAdornment: <InputAdornment position="start">Activst.com/</InputAdornment>,
                 }}
                      onChange={event => handleUsernameChange(event.target.value)}
