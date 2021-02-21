@@ -174,11 +174,17 @@ MuiInput-underline:before {
   .variableContainer{
     width: 75%;
   }
+  .causeContainer{
+    width: 90%;
+  }
 }
 
 @media only screen and (max-width: 600px) and (min-width: 401px) {
   .variableContainer{
     width: 75%;
+  }
+  .causeContainer{
+    width: 85%;
   }
 }
 
@@ -186,11 +192,17 @@ MuiInput-underline:before {
   .variableContainer{
     width: 70%;
   }
+  .causeContainer{
+    width: 80%;
+  }
 }
 
 @media only screen and (max-width: 1000px) and (min-width: 801px){
   .variableContainer{
     width: 60%;
+  }
+  .causeContainer{
+    width: 70%;
   }
 }
 
@@ -198,16 +210,25 @@ MuiInput-underline:before {
   .variableContainer{
     width: 50%;
   }
+  .causeContainer{
+    width: 60%;
+  }
 }
 @media only screen and (min-width: 1201px) and (max-width: 1400px) {
   .variableContainer{
     width: 40%;
+  }
+  .causeContainer{
+    width: 50%;
   }
 }
 
 @media only screen and (min-width: 1401px) {
   .variableContainer{
     width: 30%;
+  }
+  .causeContainer{
+    width: 40%;
   }
 }
 
@@ -218,4 +239,12 @@ MuiInput-underline:before {
   to {
     transform: rotate(360deg);
   }
+}
+
+.Toaster__alert{
+  background-color: #f50057!important;
+}
+
+.Toaster__alert_text{
+  color: white!important;
 }

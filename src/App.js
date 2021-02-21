@@ -259,7 +259,7 @@ function App() {
                 ref = {ref}
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                className={"modal variableContainer"}
+                className={"modal causeContainer"}
                 open={open}
                 onClose={handleClose}
                 closeAfterTransition
