@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 import firebase from 'firebase/app';
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/analytics";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ firebase.initializeApp({
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const analytics = firebase.analytics();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => {
     auth.signInWithPopup(googleProvider).then((res) => {
@@ -25,6 +27,10 @@ export const signInWithGoogle = () => {
     }).catch((error) => {
         console.log(error.message)
     })
+};
+
+export const logEventOnAnalytics = (ke, val) => {
+    analytics.logEvent(ke, val);
 };
 
 export const signOut = () => {

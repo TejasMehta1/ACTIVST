@@ -11,7 +11,7 @@
 
 
 .cropImage{
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 100%;
 }
 

@@ -21,11 +21,12 @@ import axios from "axios";
 import Cause from './Cause';
 import {getCauseArray} from './services/firebase';
 import {UserContext} from "./providers/UserProvider";
-import { Redirect, useHistory } from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import InstagramIcon from '@material-ui/icons/Instagram';
 import Button from "@material-ui/core/Button";
 import ClearIcon from '@material-ui/icons/Clear';
 import WebIcon from '@material-ui/icons/Web';
+import {logEventOnAnalytics} from "./services/firebase";
 import {
     useParams
 } from "react-router-dom";
@@ -45,7 +46,6 @@ function App() {
     const [donation, setDonation] = React.useState(false);
     const [showCauses, setShowCauses] = React.useState(false);
     const [causeData, setCauseData] = React.useState([{title: "Activst", image: ""}]);
-
 
 
     const nl2br = require('react-nl2br');
@@ -71,6 +71,7 @@ function App() {
     const handleOpen = (ind) => {
         setOpen(true);
         setCurrIndex(ind);
+        logEventOnAnalytics('CauseExplored', {url: userHash, loggedIn: user != null});
     };
 
     const user = useContext(UserContext);
@@ -79,31 +80,30 @@ function App() {
 
 
     useEffect(() => {
+        logEventOnAnalytics('ProfileView', {url: userHash, loggedIn: user != null});
         getCauseArray(userHash).then(r => {
-            if(r){
-                if(r.length >= 1) {
+            if (r) {
+                if (r.length >= 1) {
                     let valid = true;
-                    for (let i = 0; i < r.length; i++){
+                    for (let i = 0; i < r.length; i++) {
 
                         valid = neededKeys.every(key => Object.keys(r[i]).includes(key));
-                        if(valid){
+                        if (valid) {
                             valid = r[i].title.length > 0
                         }
 
                     }
-                    if (valid){
+                    if (valid) {
                         setShowCauses(true);
                         setCauseData(r);
                         console.log(r);
                         console.log(userHash);
-                    }
-                    else{
+                    } else {
                         setShowCauses(false);
                     }
 
                 }
-            }
-            else{
+            } else {
                 history.push({
                         pathname: "/notfound",
                         search: '?query=' + userHash
@@ -112,8 +112,6 @@ function App() {
             }
         });
     }, []);
-
-
 
 
     const handleClose = () => {
@@ -143,8 +141,8 @@ function App() {
     };
 
     const anyDonationIsPresent = () => {
-        for (let i = 0; i < donationTypes.length; i++){
-            if (donationIsPresent(donationTypes[i])){
+        for (let i = 0; i < donationTypes.length; i++) {
+            if (donationIsPresent(donationTypes[i])) {
                 return true;
             }
         }
@@ -152,10 +150,9 @@ function App() {
     };
 
     const getDonation = (param) => {
-        if (donationIsPresent(param)){
+        if (donationIsPresent(param)) {
             return causeData[currIndex][param];
-        }
-        else{
+        } else {
             return "";
         }
     };
@@ -191,13 +188,14 @@ function App() {
             countryCode: 'US',
         },
     };
+
     function handleLoadPaymentData(paymentData) {
 
 
         const params = new URLSearchParams({
-            "causeName" : causeData[currIndex].title,
-            "causeEmail" : "tejasmehtag@gmail.com",
-            "amt" : value,
+            "causeName": causeData[currIndex].title,
+            "causeEmail": "tejasmehtag@gmail.com",
+            "amt": value,
             "pwd": "checkbook"
         }).toString();
 
@@ -206,9 +204,11 @@ function App() {
         // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
         console.log('load payment data', paymentData);
-        axios.post(url,  {headers: {
-            "Content-Type": "text/plain"}
-    })
+        axios.post(url, {
+            headers: {
+                "Content-Type": "text/plain"
+            }
+        })
             .then(res => {
                 console.log(res);
                 console.log(res.data);
@@ -216,11 +216,14 @@ function App() {
                 handleClose();
             })
     }
+
     const ref = createRef(null);
     const [image, takeScreenshot] = useScreenshot();
     const getImage = () => {
         // let prev = document.getElementById("instaButton").style.display;
         // document.getElementById("instaButton").style.display = "none";
+        logEventOnAnalytics('CauseEngagement', {url: userHash, loggedIn: user != null});
+        logEventOnAnalytics('ShareStory', {url: userHash, loggedIn: user != null});
         takeScreenshot(ref.current, {allowTaint: true, useCORS: true});
         // document.getElementById("instaButton").style.display = prev;
     };
@@ -229,8 +232,7 @@ function App() {
         downloadImg();
     }, [image]);
 
-    const downloadImg = () =>
-    {
+    const downloadImg = () => {
         if (image) {
             // let svgElements = document.body.querySelectorAll('svg');
             // svgElements.forEach(function(item) {
@@ -243,7 +245,7 @@ function App() {
             const downloadLink = document.createElement("a");
             downloadLink.href = linkSource;
             let today = new Date();
-            let niceDate = today.getFullYear() + "-"  + today.getMonth() + "-" + today.getDate() + '-' + today.getHours() + "+" + today.getMinutes();
+            let niceDate = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate() + '-' + today.getHours() + "+" + today.getMinutes();
             downloadLink.download = getDonation('title') + "-" + niceDate + ".png";
             downloadLink.click();
             window.location.href = 'instagram://story-camera';
@@ -256,7 +258,7 @@ function App() {
         <div className="App">
 
             <Modal
-                ref = {ref}
+                ref={ref}
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
                 className={"modal causeContainer"}
@@ -270,21 +272,29 @@ function App() {
             >
                 <Fade in={open}>
                     <div className={"paper"}>
-                        <ClearIcon id={"closeModal"} onClick={handleClose} />
+                        <ClearIcon id={"closeModal"} onClick={handleClose}/>
                         <h2 id="transition-modal-title">{causeData[currIndex].title}</h2>
-                        <img src={causeData[currIndex].image} width={150} onError={(e)=>{e.target.onerror = null; e.target.width=0; e.target.height=0;}} />
+                        <img src={causeData[currIndex].image} width={150} onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.width = 0;
+                            e.target.height = 0;
+                        }}/>
                         <p id="transition-modal-description">
                             {nl2br(causeData[currIndex].description)}
                         </p>
                         {donationIsPresent('website') ?
-                        <Button
-                            className={"donationButton"}
-                            // variant="contained"
-                            color="primary"
-                            onClick={() => window.open(getDonation("website"), "_blank")}
-                            id={"websiteButton"}
-                            startIcon={<WebIcon/>}
-                        >Learn More</Button> : "" }
+                            <Button
+                                className={"donationButton"}
+                                // variant="contained"
+                                color="primary"
+                                onClick={() => {
+                                    logEventOnAnalytics('CauseEngagement', {url: userHash, loggedIn: user != null});
+                                    logEventOnAnalytics('LearnMore', {url: userHash, loggedIn: user != null});
+                                    window.open(getDonation("website"), "_blank")
+                                }}
+                                id={"websiteButton"}
+                                startIcon={<WebIcon/>}
+                            >Learn More</Button> : ""}
 
                         <h6>Spread Awareness by Sharing:
 
@@ -300,114 +310,141 @@ function App() {
                         </h6>
 
                         {donationIsPresent('petition') ?
-                        <h6>Let Your Voice Be Heard By Signing:
-                        <br/>
+                            <h6>Let Your Voice Be Heard By Signing:
+                                <br/>
 
-                            <Button
-                                className={"donationButton"}
-                                variant="contained"
-                                color="secondary"
-                                id={"petitionButton"}
-                                startIcon={<img width={10} src={petition}/>}
-                                onClick={() => window.open(getDonation("petition"), "_blank")}
-                            >Petition </Button>
-                        </h6>
-                            : null }
+                                <Button
+                                    className={"donationButton"}
+                                    variant="contained"
+                                    color="secondary"
+                                    id={"petitionButton"}
+                                    startIcon={<img width={10} src={petition}/>}
+                                    onClick={() => {
+                                        logEventOnAnalytics('CauseEngagement', {url: userHash, loggedIn: user != null});
+                                        logEventOnAnalytics('SignPetition', {url: userHash, loggedIn: user != null});
+                                        window.open(getDonation("petition"), "_blank")
+                                    }
+                                    }
+                                >Petition </Button>
+                            </h6>
+                            : null}
 
-                         <h6>{ anyDonationIsPresent() ? "Donate!" : ""}
+                        <h6>{anyDonationIsPresent() ? "Donate!" : ""}
 
-                            { donationIsPresent("venmo") ? <React.Fragment>
+                            {donationIsPresent("venmo") ? <React.Fragment>
                                 <br/>
                                 <Button
                                     className={"donationButton"}
-                            variant="contained"
-                            color="secondary"
-                            id={"venmoButton"}
-                            onClick={() => window.open("https://venmo.com/" + getDonation("venmo"), "_blank")}
-                            endIcon={<img width={75} src={venmoIcon}/>}
-                        >
-                            <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
-                            Donate with
-                        </Button> </React.Fragment>: null}
+                                    variant="contained"
+                                    color="secondary"
+                                    id={"venmoButton"}
+                                    onClick={() => {
+                                        logEventOnAnalytics('CauseEngagement', {url: userHash, loggedIn: user != null});
+                                        logEventOnAnalytics('Venmo', {url: userHash, loggedIn: user != null});
+                                        logEventOnAnalytics('Donate', {url: userHash, loggedIn: user != null});
+                                        window.open("https://venmo.com/" + getDonation("venmo"), "_blank")
+                                    }
+                                    }
+                                    endIcon={<img width={75} src={venmoIcon}/>}
+                                >
+                                    <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
+                                    Donate with
+                                </Button> </React.Fragment> : null}
 
-                            { donationIsPresent("gofundme") ? <React.Fragment>
-                                    <br/> <Button
-                            className={"donationButton"}
-                            variant="contained"
-                            color="secondary"
-                            id={"gfmButton"}
-                            onClick={() => window.open(getDonation("gofundme"), "_blank")}
-                            endIcon={<img width={75} src={gfm}/>}
-                        >
-                            <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
-                            Donate with
-                            </Button> </React.Fragment>: null}
-
-                            { donationIsPresent("cashapp") ? <React.Fragment>
-                                    <br/><Button
+                            {donationIsPresent("gofundme") ? <React.Fragment>
+                                <br/> <Button
                                 className={"donationButton"}
-                            variant="contained"
-                            color="none"
-                            id={"cashAppButton"}
-                            onClick={() => window.open("https://cash.app/$" + getDonation("cashapp"), "_blank")}
-                            endIcon={<img width={75} src={cashApp}/>}
-                        >
-                            <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
-                            Donate with
-                            </Button> </React.Fragment>: null }
-                             { donationIsPresent("direct") ? <React.Fragment>
-                                     <br/><Button
-                                 className={"donationButton"}
-                                 variant="contained"
-                                 color="none"
-                                 id={"directButton"}
-                                 color={"secondary"}
-                                 onClick={() => window.open(getDonation("direct"), "_blank")}
-                                 endIcon={<WebIcon/>}
-                             >
-                                 <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}} />
-                                 Donate on website
-                             </Button> </React.Fragment>: null }
+                                variant="contained"
+                                color="secondary"
+                                id={"gfmButton"}
+                                onClick={() => {
+                                    logEventOnAnalytics('CauseEngagement', {url: userHash, loggedIn: user != null});
+                                    logEventOnAnalytics('Gofundme', {url: userHash, loggedIn: user != null});
+                                    logEventOnAnalytics('Donate', {url: userHash, loggedIn: user != null});
+                                    window.open(getDonation("gofundme"), "_blank")
+                                }
+                                }
+                                endIcon={<img width={75} src={gfm}/>}
+                            >
+                                <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
+                                Donate with
+                            </Button> </React.Fragment> : null}
+
+                            {donationIsPresent("cashapp") ? <React.Fragment>
+                                <br/><Button
+                                className={"donationButton"}
+                                variant="contained"
+                                color="none"
+                                id={"cashAppButton"}
+                                onClick={() => {
+                                    logEventOnAnalytics('CauseEngagement', {url: userHash, loggedIn: user != null});
+                                    logEventOnAnalytics('CashApp', {url: userHash, loggedIn: user != null});
+                                    logEventOnAnalytics('Donate', {url: userHash, loggedIn: user != null});
+                                    window.open("https://cash.app/$" + getDonation("cashapp"), "_blank")
+                                }
+                                }
+                                endIcon={<img width={75} src={cashApp}/>}
+                            >
+                                <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
+                                Donate with
+                            </Button> </React.Fragment> : null}
+                            {donationIsPresent("direct") ? <React.Fragment>
+                                <br/><Button
+                                className={"donationButton"}
+                                variant="contained"
+                                color="none"
+                                id={"directButton"}
+                                color={"secondary"}
+                                onClick={() => {
+                                    logEventOnAnalytics('CauseEngagement', {url: userHash, loggedIn: user != null});
+                                    logEventOnAnalytics('DirectDonate', {url: userHash, loggedIn: user != null});
+                                    logEventOnAnalytics('Donate', {url: userHash, loggedIn: user != null});
+                                    window.open(getDonation("direct"), "_blank")
+                                }
+                                }
+                                endIcon={<WebIcon/>}
+                            >
+                                <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
+                                Donate on website
+                            </Button> </React.Fragment> : null}
 
                         </h6>
 
-                        { false ?
-                        <div>
-                        <Slider
-                            value={typeof value === 'number' ? value : 0}
-                            onChange={handleSliderChange}
-                            aria-labelledby="input-slider"
-                        />
+                        {false ?
+                            <div>
+                                <Slider
+                                    value={typeof value === 'number' ? value : 0}
+                                    onChange={handleSliderChange}
+                                    aria-labelledby="input-slider"
+                                />
 
 
+                                <Input
+                                    className={"sliderInput"}
+                                    value={value}
+                                    margin="dense"
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    startAdornment={<InputAdornment style={{color: "white"}}
+                                                                    position="start">$</InputAdornment>}
+                                    inputProps={{
+                                        step: 10,
+                                        min: 0,
+                                        max: 100,
+                                        type: 'number',
+                                        'aria-labelledby': 'input-slider',
 
-
-
-                        <Input
-                            className={"sliderInput"}
-                            value={value}
-                            margin="dense"
-                            onChange={handleInputChange}
-                            onBlur={handleBlur}
-                            startAdornment={<InputAdornment style={{color: "white"}} position="start">$</InputAdornment>}
-                            inputProps={{
-                                step: 10,
-                                min: 0,
-                                max: 100,
-                                type: 'number',
-                                'aria-labelledby': 'input-slider',
-
-                            }}
-                        />
-                        <br/>
-                        <GooglePayButton
-                            environment="TEST"
-                            buttonType={"donate"}
-                            buttonColor="yellow"
-                            paymentRequest={paymentRequest}
-                            onLoadPaymentData={handleLoadPaymentData}
-                        />
-                        </div> : null }
+                                    }}
+                                />
+                                <br/>
+                                <GooglePayButton
+                                    environment="TEST"
+                                    buttonType={"donate"}
+                                    buttonColor="yellow"
+                                    paymentRequest={paymentRequest}
+                                    onLoadPaymentData={handleLoadPaymentData}
+                                />
+                            </div> : null}
 
                     </div>
                 </Fade>
@@ -423,17 +460,17 @@ function App() {
                 </div>
                 <h1>@{userHash}'s Causes</h1>
 
-                    <Grid item xs={12}>
-                        <Grid container justify="center" spacing={0}>
-                            {showCauses ? causeData.map((data, index) => (
-                                <Grid key={index} item>
-                                    <Cause title={data.title} picture={data.image} handleOpen={handleOpen} index={index}/>
-                                </Grid>
-                            )) : userHash + " is currently advocating for no Causes"}
-                        </Grid>
+                <Grid item xs={12}>
+                    <Grid container justify="center" spacing={0}>
+                        {showCauses ? causeData.map((data, index) => (
+                            <Grid key={index} item>
+                                <Cause title={data.title} picture={data.image} handleOpen={handleOpen} index={index}/>
+                            </Grid>
+                        )) : userHash + " is currently advocating for no Causes"}
                     </Grid>
+                </Grid>
 
-                <LinearProgress className={"progressBar"} variant="determinate" value={(4000+donation)/9000*100} />
+                <LinearProgress className={"progressBar"} variant="determinate" value={(4000 + donation) / 9000 * 100}/>
                 <h3>${4000 + donation} raised out of $9000 goal</h3>
             </header>
         </div>

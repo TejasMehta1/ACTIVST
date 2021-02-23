@@ -18,6 +18,7 @@ return(
             onClick={() => {
                 handleOpen(index);
             }}
+            style = {{objectFit: "cover"}}
         />
         <Figure.Caption>
             {title}
