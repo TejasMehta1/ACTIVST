@@ -101,6 +101,12 @@
   width: 50%!important;
 }
 
+.carouselText{
+  font-size: .75em;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
 .cause{
   /*width: 1000px;*/
   -webkit-transition: .5s ease-out;
@@ -116,14 +122,17 @@
   border-radius: 100%;
 }
 .cause:hover{
+  filter: drop-shadow(0 0 50px darkblue) brightness(70%) grayscale(50%);
+  transform: scale(1.05);
+  -webkit-transition: .25s ease-out;
+  -moz-transition: .25s ease-out;
+  -o-transition: .25s ease-out;
+  transition: .25s ease-out;
 
+}
 
-  filter: hue-rotate(90deg) drop-shadow(0 0 50px darkblue) contrast(70%);
-  -webkit-transition: .5s ease-out;
-  -moz-transition: .5s ease-out;
-  -o-transition: .5s ease-out;
-  transition: .5s ease-out;
-
+.slick-dots{
+  filter: invert(100%);
 }
 
 .sliderInput{
@@ -136,6 +145,11 @@ MuiInput-underline:before {
 
   border-bottom-color: rgba(255, 255, 255, 0.42)!important;
 
+}
+
+.center{
+  margin-left: auto;
+  margin-right: auto;
 }
 
 

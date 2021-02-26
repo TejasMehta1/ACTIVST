@@ -397,7 +397,7 @@ function App() {
                                 color={"secondary"}
                                 onClick={() => {
                                     logEventOnAnalytics('CauseEngagement', {url: userHash, loggedIn: user != null});
-                                    logEventOnAnalytics('DirectDonate', {url: userHash, loggedIn: user != null});
+                                    logEventOnAnalytics('DirectDonate-', {url: userHash, loggedIn: user != null});
                                     logEventOnAnalytics('Donate', {url: userHash, loggedIn: user != null});
                                     window.open(getDonation("direct"), "_blank")
                                 }
@@ -410,7 +410,7 @@ function App() {
 
                         </h6>
 
-                        {false ?
+                        {userHash==="cantorarts" ?
                             <div>
                                 <Slider
                                     value={typeof value === 'number' ? value : 0}
@@ -469,9 +469,12 @@ function App() {
                         )) : userHash + " is currently advocating for no Causes"}
                     </Grid>
                 </Grid>
-
+                {userHash==="cantorarts" ?
                 <LinearProgress className={"progressBar"} variant="determinate" value={(4000 + donation) / 9000 * 100}/>
-                <h3>${4000 + donation} raised out of $9000 goal</h3>
+                 : null }
+                {userHash==="cantorarts" ?
+                <h3>${4000 + donation} raised out of $9000 goal</h3> : null }
+
             </header>
         </div>
     );
