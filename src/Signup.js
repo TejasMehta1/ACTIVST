@@ -91,7 +91,7 @@ function Signup (){
             <header className="App-header">
                 <h1>Welcome {user && ['displayName'] in user ? user['displayName'] : ""}!</h1>
                 <div className="variableContainer">
-                    <p>Create your custom domain to host the causes you're most passionate about and allow for one-click donations (only use lowercase letters, numbers, and hyphens</p>
+                    <p>Create your custom domain to host the causes you're most passionate about and allow for one-click donations <br/> <span style={{fontSize: "0.6em"}}>(please only use lowercase letters, numbers, and hyphens)</span></p>
                     <br/>
                     <TextField error={!isValidUrl(userName)} value={userName} id="username" label="Username(*)"  InputProps={{
                     startAdornment: <InputAdornment position="start">activst.org/</InputAdornment>,

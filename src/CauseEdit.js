@@ -38,6 +38,7 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
     const [completedCrop, setCompletedCrop] = useState(null);
     const previewCanvasRef = useRef(null);
     const [open, setOpen] = React.useState(false);
+    const [disableSaveCrop, setDisableSaveCrop] = React.useState(false);
     const autofillCauseData = autofillData();
 
 
@@ -115,6 +116,10 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
     }, []);
 
     function generateDownload(canvas, crop) {
+
+        setDisableSaveCrop(true);
+        document.body.style.cursor = "wait";
+
         if (!crop || !canvas) {
             return;
         }
@@ -135,6 +140,8 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
                     };
                     axios.post(apiUrl, data)
                         .then((response) => {
+                            document.body.style.cursor = "auto";
+                            setDisableSaveCrop(true);
                             console.log(response);
                             setOpen(false);
                             try {
@@ -267,9 +274,10 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
                         />
                         <br/>
                         <Button
+                            id={"saveCropButton"}
                             variant="contained"
                             color="primary"
-                            disabled={!completedCrop?.width || !completedCrop?.height}
+                            disabled={!completedCrop?.width || !completedCrop?.height || disableSaveCrop}
                             size="large"
                             startIcon={<SaveIcon />}
                             onClick={() =>
