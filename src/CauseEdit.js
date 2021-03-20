@@ -128,7 +128,7 @@ function CauseEdit({ind, db, handleDelete, updateDB}) {
                 reader.onloadend = function() {
                     let base64data = reader.result;
                     console.log(base64data);
-                    let apiUrl = "http://localhost:5001/activst/us-central1/addMessage";
+                    let apiUrl = " https://us-central1-activst.cloudfunctions.net/addMessage\n";
 
                     const data = {
                         image: base64data
