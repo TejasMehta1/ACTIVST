@@ -38,6 +38,8 @@ import cashApp from './CashApp.svg'
 import petition from './petition.svg'
 import instagram from "./instagram.svg"
 import Checkbox from '@material-ui/core/Checkbox';
+import {CopyToClipboard} from "react-copy-to-clipboard";
+import toaster from "toasted-notes";
 
 function App() {
     const [progress, setProgress] = useState(0);
@@ -458,7 +460,13 @@ function App() {
                         loaderSpeed={600}
                     />
                 </div>
-                <h1>@{userHash}'s Causes</h1>
+                <h1>@{userHash}'s Causes   <CopyToClipboard text={window.location.href}
+                                                            onCopy={() => toaster.notify("Copied to clipboard", {
+                                                                duration: 1000
+                                                            })}>
+                    <Button><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="#FFFFFF"/></svg>
+                    </Button>
+                </CopyToClipboard></h1>
 
                 <Grid item xs={12}>
                     <Grid container justify="center" spacing={0}>

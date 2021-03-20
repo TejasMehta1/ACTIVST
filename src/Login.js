@@ -77,7 +77,7 @@ function Login (){
                             <img className={"center"} width={300} src={CausesMock}/>
                         </div>
                         <div>
-                            <p className={"carouselText"}>Add Tangible ways to make a difference</p>
+                            <p className={"carouselText"}>Add tangible ways to make a difference</p>
                             <img className={"center"} width={300} src={CauseEditMock}/>
                         </div>
                         <div>

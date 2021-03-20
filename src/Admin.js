@@ -12,6 +12,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import toaster from "toasted-notes";
 import "toasted-notes/src/styles.css"; // optional styles
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 import './Signup.css';
 import Grid from "@material-ui/core/Grid";
@@ -221,11 +222,22 @@ function Admin (){
         <div className="App">
             <header className="App-header">
                 <h1>Welcome {user && ['displayName'] in user ? user['displayName'] : ""}!</h1>
-                       <TextField id="username" label="Username" error={!isValidUrl(userName)}  value={userName} InputProps={{
-                        startAdornment: <InputAdornment position="start">Activst.com/</InputAdornment>,
+                       <div>
+
+                <TextField id="username" label="Username" error={!isValidUrl(userName)}  value={userName} InputProps={{
+                        startAdornment: <InputAdornment position="start">activst.org/</InputAdornment>,
                     }}
                                onChange={event => handleUsernameChange(event.target.value)}
                     />
+                <CopyToClipboard text={"https://activst.org/" + userName}
+                    onCopy={() => toaster.notify("Copied to clipboard", {
+                    duration: 1000
+                })}>
+                    <Button><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="#FFFFFF"/></svg>
+                    </Button>
+                </CopyToClipboard>
+                       </div>
+
 
                 {causeDBData.length >= 1 ? causeDBData.map((data,index) => (
                         <CauseEdit ind={index} db = {data} handleDelete={handleDelete} updateDB={updateDB}/>

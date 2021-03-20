@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import toaster from "toasted-notes";
 import "toasted-notes/src/styles.css"; // optional styles
+import InstaMock from "./InstagramMock.png"
 
 import './Signup.css';
 function Signup (){
@@ -93,7 +94,7 @@ function Signup (){
                     <p>Create your custom domain to host the causes you're most passionate about and allow for one-click donations (only use lowercase letters, numbers, and hyphens</p>
                     <br/>
                     <TextField error={!isValidUrl(userName)} value={userName} id="username" label="Username(*)"  InputProps={{
-                    startAdornment: <InputAdornment position="start">Activst.com/</InputAdornment>,
+                    startAdornment: <InputAdornment position="start">activst.org/</InputAdornment>,
                 }}
                      onChange={event => handleUsernameChange(event.target.value)}
                      />
@@ -107,6 +108,9 @@ function Signup (){
                     >
                         Activate
                     </Button>
+                    <br/>
+                    <img style={{width: "50%", marginTop:"30px"}} src={InstaMock}/>
+
                 </div>
             </header>
         </div>
