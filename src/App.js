@@ -40,6 +40,7 @@ import instagram from "./instagram.svg"
 import Checkbox from '@material-ui/core/Checkbox';
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import toaster from "toasted-notes";
+import Hand from "./helping.svg";
 
 function App() {
     const [progress, setProgress] = useState(0);
@@ -48,6 +49,7 @@ function App() {
     const [donation, setDonation] = React.useState(false);
     const [showCauses, setShowCauses] = React.useState(false);
     const [causeData, setCauseData] = React.useState([{title: "Activst", image: ""}]);
+    const [displayInstaScreenshot, setDisplayInstaScreenshot] = React.useState("none");
 
 
     const nl2br = require('react-nl2br');
@@ -191,6 +193,9 @@ function App() {
         },
     };
 
+    const drawInstagramStory = () => {
+    };
+
     function handleLoadPaymentData(paymentData) {
 
 
@@ -222,6 +227,7 @@ function App() {
     const ref = createRef(null);
     const [image, takeScreenshot] = useScreenshot();
     const getImage = () => {
+        document.getElementById("instagramCanvasContainer").style.display = "block";
         // let prev = document.getElementById("instaButton").style.display;
         // document.getElementById("instaButton").style.display = "none";
         logEventOnAnalytics('CauseEngagement', {url: userHash, loggedIn: user != null});
@@ -250,6 +256,7 @@ function App() {
             let niceDate = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate() + '-' + today.getHours() + "+" + today.getMinutes();
             downloadLink.download = getDonation('title') + "-" + niceDate + ".png";
             downloadLink.click();
+            document.getElementById("instagramCanvasContainer").style.display = "none";
             window.location.href = 'instagram://story-camera';
         }
     };
@@ -259,8 +266,89 @@ function App() {
 
         <div className="App">
 
+            <div ref={ref} style={{display: "none"}} id={"instagramCanvasContainer"}>
+            <div onClick={drawInstagramStory} id={"instagramCanvas"}>
+                <h1>{causeData[currIndex].title}</h1>
+                <img id="instagramCanvasImg" src={causeData[currIndex].image}/>
+
+
+
+                {donationIsPresent('petition') ?
+                    <React.Fragment>
+
+                        <Button
+                            className={"donationButton"}
+                            variant="contained"
+                            color="secondary"
+                            id={"instaPetitionButton"}
+                            endIcon={<img width={10} src={petition}/>}
+                        >Sign a Petition </Button>
+                        <br/>
+                    </React.Fragment>
+
+                    : null}
+
+                {donationIsPresent("gofundme") ? <React.Fragment>
+                   <Button
+                    className={"donationButton"}
+                    variant="contained"
+                    color="secondary"
+                    id={"instaGfmButton"}
+                    endIcon={<img width={75} src={gfm}/>}
+                >
+                    <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
+                    Donate with
+                </Button> </React.Fragment> : null}
+
+
+
+                {donationIsPresent("direct") ? <React.Fragment>
+                    <br/><Button
+                    className={"donationButton"}
+                    variant="contained"
+                    color="none"
+                    color={"secondary"}
+                    id={"instaDirectButton"}
+                    endIcon={<WebIcon/>}
+                >
+                    <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
+                    Donate on website
+                </Button> </React.Fragment> : null}
+
+                {donationIsPresent("venmo") ? <React.Fragment>
+                    <br/>
+                    <Button
+                        className={"donationButton"}
+                        variant="contained"
+                        color="secondary"
+                        id={"instaVenmoButton"}
+                        endIcon={<img width={75} src={venmoIcon}/>}
+                    >
+                        <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
+                        Donate with
+                    </Button> </React.Fragment> : null}
+
+                {donationIsPresent("cashapp") ? <React.Fragment>
+                    <br/><Button
+                    className={"donationButton"}
+                    variant="contained"
+                    color="none"
+                    id={"instaCashAppButton"}
+                    endIcon={<img width={75} src={cashApp}/>}
+                >
+                    <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
+                    Donate with
+                </Button> </React.Fragment> : null}
+
+                <h3>Link in bio <br/><u>{window.location.host+ window.location.pathname}</u></h3>
+
+
+                <h2  className={"instaLogo"}><span>ACTIVST</span> <img id={"instaLogoHand"} src={Hand}/></h2>
+
+            </div>
+            </div>
             <Modal
-                ref={ref}
+                // ref={ref}
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
                 className={"modal causeContainer"}
