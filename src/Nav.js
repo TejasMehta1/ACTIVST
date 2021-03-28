@@ -7,6 +7,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import "./Nav.css"
+import { signInWithGoogle } from './services/firebase';
 import Grid from "@material-ui/core/Grid";
 import Tooltip from '@material-ui/core/Tooltip';
 import Hand from "./helping.svg"
@@ -16,7 +17,13 @@ function Nav (){
     const user = useContext(UserContext);
     const history = useHistory();
     const goTo = () =>{
-        history.push('/');
+        if (history.location.pathname == '/'){
+            signInWithGoogle();
+        }
+        else{
+            history.push('/');
+        }
+
     };
 
     const signOutAndGoTo = () => {
@@ -39,7 +46,7 @@ function Nav (){
            <div className={"Right vertical-center"}>
                {user ? <p className={"Welcome"}> <Tooltip title={user.email} arrow>
                    <img className={"pfp vertical-center"} src={user.photoURL} alt="Profile"/>
-               </Tooltip>  <Button id={"adminButton"} variant={"contained"} onClick={goTo}>Admin</Button> <Button id={"signOut"} onClick={signOutAndGoTo}>Sign Out</Button> </p>  :  (window.location.pathname !== "/" ? <Button onClick={goTo}>Sign Up</Button> : "")}
+               </Tooltip>  <Button id={"adminButton"} variant={"contained"} onClick={goTo}>Admin</Button> <Button id={"signOut"} onClick={signOutAndGoTo}>Sign Out</Button> </p>  :  (history.location.pathname !== "/" ? <Button onClick={goTo}>Sign Up</Button> : "")}
 
            </div>
 
