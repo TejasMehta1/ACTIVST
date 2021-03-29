@@ -27,6 +27,8 @@ import Button from "@material-ui/core/Button";
 import ClearIcon from '@material-ui/icons/Clear';
 import WebIcon from '@material-ui/icons/Web';
 import {logEventOnAnalytics} from "./services/firebase";
+
+import download from "downloadjs"
 import {
     useParams
 } from "react-router-dom";
@@ -41,6 +43,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import toaster from "toasted-notes";
 import Hand from "./helping.svg";
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+
 
 function App() {
     const [progress, setProgress] = useState(0);
@@ -226,15 +231,36 @@ function App() {
 
     const ref = createRef(null);
     const [image, takeScreenshot] = useScreenshot();
+    // const getImage = () => {
+    //     document.getElementById("instagramCanvasContainer").style.display = "block";
+    //     // let prev = document.getElementById("instaButton").style.display;
+    //     // document.getElementById("instaButton").style.display = "none";
+    //     logEventOnAnalytics('CauseEngagement', {url: userHash, loggedIn: user != null});
+    //     logEventOnAnalytics('ShareStory', {url: userHash, loggedIn: user != null});
+    //     takeScreenshot(ref.current, {allowTaint: true, useCORS: true});
+    //     // document.getElementById("instaButton").style.display = prev;
+    // };
+
     const getImage = () => {
         document.getElementById("instagramCanvasContainer").style.display = "block";
         // let prev = document.getElementById("instaButton").style.display;
         // document.getElementById("instaButton").style.display = "none";
         logEventOnAnalytics('CauseEngagement', {url: userHash, loggedIn: user != null});
         logEventOnAnalytics('ShareStory', {url: userHash, loggedIn: user != null});
-        takeScreenshot(ref.current, {allowTaint: true, useCORS: true});
-        // document.getElementById("instaButton").style.display = prev;
+
+        let node = document.getElementById('instagramCanvas');
+
+        htmlToImage.toPng(node, {pixelRatio: 1})
+            .then(function (dataUrl) {
+                let today = new Date();
+                let niceDate = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate() + '-' + today.getHours() + "+" + today.getMinutes();
+                document.getElementById("instagramCanvasContainer").style.display = "none";
+                download(dataUrl, getDonation('title') + "-" + niceDate + ".png");
+                window.location.href = 'instagram://story-camera';
+            });
     };
+
+
 
     useEffect(() => {
         downloadImg();
@@ -267,85 +293,83 @@ function App() {
         <div className="App">
 
             <div ref={ref} style={{display: "none"}} id={"instagramCanvasContainer"}>
-            <div onClick={drawInstagramStory} id={"instagramCanvas"}>
-                <h1>{causeData[currIndex].title}</h1>
-                <img id="instagramCanvasImg" src={causeData[currIndex].image}/>
+                <div onClick={drawInstagramStory} id={"instagramCanvas"}>
+                    <h1>{causeData[currIndex].title}</h1>
+                    <img crossOrigin={"anonymous"} id="instagramCanvasImg" src={"https://cors.bridged.cc/" + causeData[currIndex].image}/>
 
 
+                    {donationIsPresent('petition') ?
+                        <React.Fragment>
 
-                {donationIsPresent('petition') ?
-                    <React.Fragment>
+                            <Button
+                                className={"donationButton"}
+                                variant="contained"
+                                color="secondary"
+                                id={"instaPetitionButton"}
+                                endIcon={<img width={10} src={petition}/>}
+                            >Sign a Petition </Button>
+                            <br/>
+                        </React.Fragment>
 
+                        : null}
+
+                    {donationIsPresent("gofundme") ? <React.Fragment>
                         <Button
                             className={"donationButton"}
                             variant="contained"
                             color="secondary"
-                            id={"instaPetitionButton"}
-                            endIcon={<img width={10} src={petition}/>}
-                        >Sign a Petition </Button>
-                        <br/>
-                    </React.Fragment>
-
-                    : null}
-
-                {donationIsPresent("gofundme") ? <React.Fragment>
-                   <Button
-                    className={"donationButton"}
-                    variant="contained"
-                    color="secondary"
-                    id={"instaGfmButton"}
-                    endIcon={<img width={75} src={gfm}/>}
-                >
-                    <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
-                    Donate with
-                </Button> </React.Fragment> : null}
+                            id={"instaGfmButton"}
+                            endIcon={<img width={75} src={gfm}/>}
+                        >
+                            <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
+                            Donate with
+                        </Button> </React.Fragment> : null}
 
 
-
-                {donationIsPresent("direct") ? <React.Fragment>
-                    <br/><Button
-                    className={"donationButton"}
-                    variant="contained"
-                    color="none"
-                    color={"secondary"}
-                    id={"instaDirectButton"}
-                    endIcon={<WebIcon/>}
-                >
-                    <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
-                    Donate on website
-                </Button> </React.Fragment> : null}
-
-                {donationIsPresent("venmo") ? <React.Fragment>
-                    <br/>
-                    <Button
+                    {donationIsPresent("direct") ? <React.Fragment>
+                        <br/><Button
                         className={"donationButton"}
                         variant="contained"
-                        color="secondary"
-                        id={"instaVenmoButton"}
-                        endIcon={<img width={75} src={venmoIcon}/>}
+                        color="none"
+                        color={"secondary"}
+                        id={"instaDirectButton"}
+                        endIcon={<WebIcon/>}
+                    >
+                        <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
+                        Donate on website
+                    </Button> </React.Fragment> : null}
+
+                    {donationIsPresent("venmo") ? <React.Fragment>
+                        <br/>
+                        <Button
+                            className={"donationButton"}
+                            variant="contained"
+                            color="secondary"
+                            id={"instaVenmoButton"}
+                            endIcon={<img width={75} src={venmoIcon}/>}
+                        >
+                            <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
+                            Donate with
+                        </Button> </React.Fragment> : null}
+
+                    {donationIsPresent("cashapp") ? <React.Fragment>
+                        <br/><Button
+                        className={"donationButton"}
+                        variant="contained"
+                        color="none"
+                        id={"instaCashAppButton"}
+                        endIcon={<img width={75} src={cashApp}/>}
                     >
                         <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
                         Donate with
                     </Button> </React.Fragment> : null}
 
-                {donationIsPresent("cashapp") ? <React.Fragment>
-                    <br/><Button
-                    className={"donationButton"}
-                    variant="contained"
-                    color="none"
-                    id={"instaCashAppButton"}
-                    endIcon={<img width={75} src={cashApp}/>}
-                >
-                    <line style={{cursor: "pointer", stroke: "black", strokeWidth: 2}}/>
-                    Donate with
-                </Button> </React.Fragment> : null}
-
-                <h3>Link in bio <br/><u>{window.location.host+ window.location.pathname}</u></h3>
+                    <h3>Link in bio <br/><u>{window.location.host + window.location.pathname}</u></h3>
 
 
-                <h2  className={"instaLogo"}><span>ACTIVST</span> <img id={"instaLogoHand"} src={Hand}/></h2>
+                    <h2 className={"instaLogo"}><span>ACTIVST</span> <img id={"instaLogoHand"} src={Hand}/></h2>
 
-            </div>
+                </div>
             </div>
             <Modal
                 // ref={ref}
@@ -500,7 +524,7 @@ function App() {
 
                         </h6>
 
-                        {userHash==="cantorarts" ?
+                        {userHash === "cantorarts" ?
                             <div>
                                 <Slider
                                     value={typeof value === 'number' ? value : 0}
@@ -548,11 +572,16 @@ function App() {
                         loaderSpeed={600}
                     />
                 </div>
-                <h1>@{userHash}'s Causes   <CopyToClipboard text={window.location.href}
-                                                            onCopy={() => toaster.notify("Copied to clipboard", {
-                                                                duration: 1000
-                                                            })}>
-                    <Button><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="#FFFFFF"/></svg>
+                <h1>@{userHash}'s Causes <CopyToClipboard text={window.location.href}
+                                                          onCopy={() => toaster.notify("Copied to clipboard", {
+                                                              duration: 1000
+                                                          })}>
+                    <Button>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path
+                                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+                                fill="#FFFFFF"/>
+                        </svg>
                     </Button>
                 </CopyToClipboard></h1>
 
@@ -565,11 +594,12 @@ function App() {
                         )) : userHash + " is currently advocating for no Causes"}
                     </Grid>
                 </Grid>
-                {userHash==="cantorarts" ?
-                <LinearProgress className={"progressBar"} variant="determinate" value={(4000 + donation) / 9000 * 100}/>
-                 : null }
-                {userHash==="cantorarts" ?
-                <h3>${4000 + donation} raised out of $9000 goal</h3> : null }
+                {userHash === "cantorarts" ?
+                    <LinearProgress className={"progressBar"} variant="determinate"
+                                    value={(4000 + donation) / 9000 * 100}/>
+                    : null}
+                {userHash === "cantorarts" ?
+                    <h3>${4000 + donation} raised out of $9000 goal</h3> : null}
 
             </header>
         </div>
