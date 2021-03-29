@@ -83,6 +83,19 @@ function App() {
         logEventOnAnalytics('CauseExplored', {url: userHash, loggedIn: user != null});
     };
 
+    function iOS() {
+        return [
+                'iPad Simulator',
+                'iPhone Simulator',
+                'iPod Simulator',
+                'iPad',
+                'iPhone',
+                'iPod'
+            ].includes(navigator.platform)
+            // iPad on iOS 13 detection
+            || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+    }
+
     const user = useContext(UserContext);
 
     // const causeData = [{index: 1, title: "Black Lives Matter", picture: "https://garveylhkgn.files.wordpress.com/2020/06/blm.png?w=450"}, {index: 2, title: "No Kid Hungry", picture: "https://pbs.twimg.com/profile_images/1179877675701342209/e9bo6xML_400x400.png"}, {index: 3, title: "Indian Farmers", picture: "https://ih1.redbubble.net/image.1745001457.7090/st,small,507x507-pad,600x600,f8f8f8.jpg"}];
@@ -255,8 +268,20 @@ function App() {
                 let today = new Date();
                 let niceDate = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate() + '-' + today.getHours() + "+" + today.getMinutes();
                 document.getElementById("instagramCanvasContainer").style.display = "none";
-                download(dataUrl, getDonation('title') + "-" + niceDate + ".png");
-                window.location.href = 'instagram://story-camera';
+                if (iOS()){
+                    console.log(dataUrl);
+                    let w = window.open('about:blank');
+                    let image = new Image();
+                    image.src = dataUrl;
+                    setTimeout(function(){
+                        w.document.write(image.outerHTML);
+                    }, 0);
+                    // window.open(dataUrl, '_blank');
+                }
+                else {
+                    download(dataUrl, getDonation('title') + "-" + niceDate + ".png");
+                    window.location.href = 'instagram://story-camera';
+                }
             });
     };
 
